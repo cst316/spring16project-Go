@@ -291,6 +291,12 @@ public class PreferencesDialog extends JDialog {
 		gbc.gridy = 4;
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
+		lfSystemRB.setText(Local.getString("System"));
+		lfSystemRB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lfSystemRB_actionPerformed(e);
+			}
+		});
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -298,6 +304,12 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(lfSystemRB, gbc);
+		lfJavaRB.setText(Local.getString("Default"));
+		lfJavaRB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lfJavaRB_actionPerformed(e);
+			}
+		});
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -766,14 +778,20 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	void lfSystemRB_actionPerformed(ActionEvent e) {
+		lfJavaRB.setSelected(false);
+		lfCustomRB.setSelected(false);
 		this.enableCustomLF(false);
 	}
 
 	void lfJavaRB_actionPerformed(ActionEvent e) {
+		lfCustomRB.setSelected(false);
+		lfSystemRB.setSelected(false);
 		this.enableCustomLF(false);
 	}
 
 	void lfCustomRB_actionPerformed(ActionEvent e) {
+		lfJavaRB.setSelected(false);
+		lfSystemRB.setSelected(false);
 		this.enableCustomLF(true);
 	}
 
