@@ -94,12 +94,16 @@ public class Util {
     }
     
     public static void runBrowser(String url) {
-        if (!checkBrowser())
+        
+		
+//////////////////////////This is old code////////////////////////////////////		
+		/*if (!checkBrowser())
             return;
         String commandLine = MimeTypesList.getAppList().getBrowserExec()+" "+url;
         System.out.println("Run: " + commandLine);
+		
         try {
-            /*DEBUG*/
+            //DEBUG
             Runtime.getRuntime().exec(commandLine);
         }
         catch (Exception ex) {
@@ -107,6 +111,18 @@ public class Util {
                     +commandLine+"</code>", "Check the application path and command line parameters " +
                     		"(File-&gt;Preferences-&gt;Resource types).");
         }
+		*/
+////////////////////////////////////////////////////////////////////////////////		
+
+// Found the solution here: http://stackoverflow.com/a/19771989 ////////////////	
+		try
+		{
+			java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+		}
+		catch (java.io.IOException e)
+		{
+			System.out.println(e.getMessage());
+		}
     }
     
     public static boolean checkBrowser() {
