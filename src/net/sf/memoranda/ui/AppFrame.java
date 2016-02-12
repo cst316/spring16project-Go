@@ -103,7 +103,7 @@ public class AppFrame extends JFrame {
         }
     };
 
-    public Action minimizeAction = new AbstractAction("Close the window") {
+    public Action minimizeAction = new AbstractAction("Iconizes the window") {
         public void actionPerformed(ActionEvent e) {
             doMinimize();
         }
@@ -704,8 +704,10 @@ public class AppFrame extends JFrame {
     }
 
     public void doMinimize() {
-        exitNotify();
-        App.closeWindow();
+       App.minimize(); //iconizes the screen
+    	/*OLD CODE 
+    	 * exitNotify();
+    	 * App.closeWindow();*/
     }
 
     //Help | About action performed
@@ -727,9 +729,9 @@ public class AppFrame extends JFrame {
                 doMinimize();
         }
         else if ((e.getID() == WindowEvent.WINDOW_ICONIFIED)) {
-            super.processWindowEvent(new WindowEvent(this,
-                    WindowEvent.WINDOW_CLOSING));
-            doMinimize();
+           /* super.processWindowEvent(new WindowEvent(this,
+                    WindowEvent.WINDOW_CLOSING)); //redundant*/
+            doMinimize(); //iconizes screen
         }
         else
             super.processWindowEvent(e);

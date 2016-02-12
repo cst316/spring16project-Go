@@ -143,7 +143,11 @@ public class App {
 			return;
 		frame.dispose();
 	}
-
+	
+	//Method minimize
+	public static void minimize(){
+		frame.setExtendedState(Frame.ICONIFIED);
+	}
 	/**
 	 * Method showSplash.
 	 */
