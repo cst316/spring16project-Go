@@ -726,8 +726,7 @@ public class AppFrame extends JFrame {
             if (Configuration.get("ON_CLOSE").equals("exit"))
                 doExit();
             else{
-            	exitNotify();
-            	App.closeWindow();
+            	doMinimize();
             }
                 
         }
