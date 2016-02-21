@@ -368,7 +368,6 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(enSystrayChB, gbc);
 		startMinimizedChB.setText(Local.getString("Start minimized"));
-		startMinimizedChB.setEnabled(false);
 		
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -573,7 +572,11 @@ public class PreferencesDialog extends JDialog {
 		}
 
 		String onmin = Configuration.get("ON_MINIMIZE").toString();
-		this.minTaskbarRB.setSelected(true);
+		if (onmin.equals("normal")) {
+			this.minTaskbarRB.setSelected(true);
+		} else {
+			this.minHideRB.setSelected(true);
+		}
 
 		if (!System.getProperty("os.name").startsWith("Win"))
 			this.browserPath.setText(MimeTypesList.getAppList()
@@ -660,7 +663,10 @@ public class PreferencesDialog extends JDialog {
 		else
 			Configuration.put("ON_CLOSE", "minimize");
 
-		Configuration.put("ON_MINIMIZE", "normal");
+		if (this.minTaskbarRB.isSelected())
+			Configuration.put("ON_MINIMIZE", "normal");
+		else
+			Configuration.put("ON_MINIMIZE", "hide");
 
 		String lf = Configuration.get("LOOK_AND_FEEL").toString();
 		String newlf = "";
