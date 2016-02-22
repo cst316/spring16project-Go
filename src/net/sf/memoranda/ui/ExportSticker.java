@@ -19,21 +19,6 @@ public class ExportSticker {
 
         private String name; 
         
-        /*public static Document _doc = null;
-        static Element _root = null;
-
-        static {
-                CurrentStorage.get().openEventsManager();
-                if (_doc == null) {
-                        _root = new Element("eventslist");
-/*                        _root.addNamespaceDeclaration("jnevents", NS_JNEVENTS);
-                        _root.appendChild(
-                                new Comment("This is JNotes 2 data file. Do not modify.")); */
-/*                        _doc = new Document(_root);
-                } else
-                        _root = _doc.getRootElement();
-
-        }*/
         
         public ExportSticker(String x) {
                 this.name = remove1(x);
@@ -44,7 +29,8 @@ public class ExportSticker {
          */
         public static String remove1(String input) {
             
-            String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
+            //String original = "Ã¡Ã Ã¤Ã©Ã¨Ã«Ã­Ã¬Ã¯Ã³Ã²Ã¶ÃºÃ¹uÃ±Ã�Ã€Ã„Ã‰ÃˆÃ‹Ã�ÃŒÃ�Ã“Ã’Ã–ÃšÃ™ÃœÃ‘Ã§Ã‡";
+        	String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
             
             String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
             String output = input;
