@@ -1,4 +1,4 @@
-package net.sf.memoranda.ui;
+﻿package net.sf.memoranda.ui;
 
 import java.io.*;
 import java.nio.*;
@@ -74,7 +74,7 @@ public class ExportSticker {
             
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null,Local.getString("NO Logramos crear su documento =(..."));
+            JOptionPane.showMessageDialog(null,Local.getString("Cannot create Document =(..."));
         }
                 
                 
