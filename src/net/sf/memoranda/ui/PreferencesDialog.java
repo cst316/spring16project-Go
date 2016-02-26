@@ -43,15 +43,16 @@ public class PreferencesDialog extends JDialog {
 
 	JLabel jLabel3 = new JLabel();
 
-	ButtonGroup lfGroup = new ButtonGroup();
+	
 
 	JRadioButton lfSystemRB = new JRadioButton();
-
 	JRadioButton lfJavaRB = new JRadioButton();
-
 	JRadioButton lfCustomRB = new JRadioButton();
 
-	JLabel classNameLabel = new JLabel();
+    ButtonGroup lfGroup = new ButtonGroup();
+	
+    
+    JLabel classNameLabel = new JLabel();
 
 	JTextField lfClassName = new JTextField();
 
@@ -291,6 +292,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.gridy = 4;
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
+		lfGroup.add(lfSystemRB);
 		lfSystemRB.setText(Local.getString("System"));
 		lfSystemRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -304,6 +306,8 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(lfSystemRB, gbc);
+		//Added Comments
+		lfGroup.add(lfJavaRB);
 		lfJavaRB.setText(Local.getString("Default"));
 		lfJavaRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -368,6 +372,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(enSystrayChB, gbc);
 		startMinimizedChB.setText(Local.getString("Start minimized"));
+		startMinimizedChB.setEnabled(false);
 		
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -572,11 +577,7 @@ public class PreferencesDialog extends JDialog {
 		}
 
 		String onmin = Configuration.get("ON_MINIMIZE").toString();
-		if (onmin.equals("normal")) {
-			this.minTaskbarRB.setSelected(true);
-		} else {
-			this.minHideRB.setSelected(true);
-		}
+		this.minTaskbarRB.setSelected(true);
 
 		if (!System.getProperty("os.name").startsWith("Win"))
 			this.browserPath.setText(MimeTypesList.getAppList()
@@ -663,10 +664,7 @@ public class PreferencesDialog extends JDialog {
 		else
 			Configuration.put("ON_CLOSE", "minimize");
 
-		if (this.minTaskbarRB.isSelected())
-			Configuration.put("ON_MINIMIZE", "normal");
-		else
-			Configuration.put("ON_MINIMIZE", "hide");
+		Configuration.put("ON_MINIMIZE", "normal");
 
 		String lf = Configuration.get("LOOK_AND_FEEL").toString();
 		String newlf = "";
