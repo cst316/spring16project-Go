@@ -62,7 +62,7 @@ public class DailyItemsPanel extends JPanel {
     public EditorPanel editorPanel = new EditorPanel(this);
     JLabel currentDateLabel = new JLabel();
     BorderLayout borderLayout4 = new BorderLayout();
-    TaskPanel tasksPanel = new TaskPanel(this);
+    ProcessPanel tasksPanel = new ProcessPanel(this);
     EventsPanel eventsPanel = new EventsPanel(this);
     AgendaPanel agendaPanel = new AgendaPanel(this);
     ImageIcon expIcon = new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/exp_right.png"));
@@ -88,7 +88,7 @@ public class DailyItemsPanel extends JPanel {
     JPanel indicatorsPanel = new JPanel();
     JButton alarmB = new JButton();
     FlowLayout flowLayout1 = new FlowLayout();
-    JButton taskB = new JButton();
+    JButton processesB = new JButton();
     JPanel mainTabsPanel = new JPanel();
     NotesControlPanel notesControlPane = new NotesControlPanel();
     CardLayout cardLayout2 = new CardLayout();
@@ -176,18 +176,18 @@ public class DailyItemsPanel extends JPanel {
         alarmB.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/alarm.png")));
         flowLayout1.setAlignment(FlowLayout.RIGHT);
         flowLayout1.setVgap(0);
-        taskB.setMargin(new Insets(0, 0, 0, 0));
-        taskB.addActionListener(new java.awt.event.ActionListener() {
+        processesB.setMargin(new Insets(0, 0, 0, 0));
+        processesB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                taskB_actionPerformed(e);
+                processesB_actionPerformed(e);
             }
         });
-        taskB.setPreferredSize(new Dimension(24, 24));
-        taskB.setToolTipText(Local.getString("Active to-do tasks"));
-        taskB.setBorderPainted(false);
-        taskB.setMaximumSize(new Dimension(24, 24));
-        taskB.setOpaque(false);
-        taskB.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/task.png")));
+        processesB.setPreferredSize(new Dimension(24, 24));
+        processesB.setToolTipText(Local.getString("Active to-do tasks"));
+        processesB.setBorderPainted(false);
+        processesB.setMaximumSize(new Dimension(24, 24));
+        processesB.setOpaque(false);
+        processesB.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/task.png")));
 
         notesControlPane.setFont(new java.awt.Font("Dialog", 1, 10));
         mainTabsPanel.setLayout(cardLayout2);
@@ -204,7 +204,7 @@ public class DailyItemsPanel extends JPanel {
         
         editorsPanel.add(agendaPanel, "AGENDA");
         editorsPanel.add(eventsPanel, "EVENTS");
-        editorsPanel.add(tasksPanel, "TASKS");
+        editorsPanel.add(tasksPanel, "PROCESSES");
         editorsPanel.add(editorPanel, "NOTES");
         
         splitPane.add(mainPanel, JSplitPane.RIGHT);
@@ -425,7 +425,7 @@ public class DailyItemsPanel extends JPanel {
         indicatorsPanel.removeAll();
         if (date.equals(CalendarDate.today())) {
             if (tl.getActiveSubTasks(null,date).size() > 0)
-                indicatorsPanel.add(taskB, null);
+                indicatorsPanel.add(processesB, null);
             if (EventsScheduler.isEventScheduled()) {
                 /*String evlist = "";
                 for (Iterator it = EventsScheduler.getScheduledEvents().iterator(); it.hasNext();) {
@@ -449,7 +449,7 @@ public class DailyItemsPanel extends JPanel {
             calendar.jnCalendar.renderer.setTask(null);
          //   calendar.jnCalendar.updateUI();
         }
-        if (pan.equals("TASKS") && (tasksPanel.taskTable.getSelectedRow() > -1)) {
+        if (pan.equals("PROCESSES") && (tasksPanel.taskTable.getSelectedRow() > -1)) {
             Task t =
                 CurrentProject.getTaskList().getTask(
                     tasksPanel
@@ -473,8 +473,8 @@ public class DailyItemsPanel extends JPanel {
 	public String getCurrentPanel() {
 		return CurrentPanel;
 	}
-    void taskB_actionPerformed(ActionEvent e) {
-        parentPanel.tasksB_actionPerformed(null);
+    void processesB_actionPerformed(ActionEvent e) {
+        parentPanel.processesB_actionPerformed(null);
     }
 
     void alarmB_actionPerformed(ActionEvent e) {
