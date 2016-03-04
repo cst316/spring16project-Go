@@ -41,33 +41,33 @@ import net.sf.memoranda.util.Local;
 import net.sf.memoranda.util.Util;
 
 /*$Id: TaskPanel.java,v 1.27 2007/01/17 20:49:12 killerjoe Exp $*/
-public class ProcessPanel extends JPanel {
+public class TaskPanel extends JPanel {
     BorderLayout borderLayout1 = new BorderLayout();
     JButton historyBackB = new JButton();
     JToolBar tasksToolBar = new JToolBar();
     JButton historyForwardB = new JButton();
-    JButton newProcessB = new JButton();
-    JButton addTaskB = new JButton();
-    JButton editB = new JButton();
-    JButton removeB = new JButton();
-    JButton completeB = new JButton();
+    JButton newTaskB = new JButton();
+    JButton subTaskB = new JButton();
+    JButton editTaskB = new JButton();
+    JButton removeTaskB = new JButton();
+    JButton completeTaskB = new JButton();
     
 	JCheckBoxMenuItem ppShowActiveOnlyChB = new JCheckBoxMenuItem();
 		
     JScrollPane scrollPane = new JScrollPane();
     TaskTable taskTable = new TaskTable();
-	JMenuItem ppEdit = new JMenuItem();
-	JPopupMenu ppMenu = new JPopupMenu();
-	JMenuItem ppRemove = new JMenuItem();
-	JMenuItem ppNewProcess = new JMenuItem();
-	JMenuItem ppComplete = new JMenuItem();
+	JMenuItem ppEditTask = new JMenuItem();
+	JPopupMenu taskPPMenu = new JPopupMenu();
+	JMenuItem ppRemoveTask = new JMenuItem();
+	JMenuItem ppNewTask = new JMenuItem();
+	JMenuItem ppCompleteTask = new JMenuItem();
 	//JMenuItem ppSubTasks = new JMenuItem();
 	//JMenuItem ppParentTask = new JMenuItem();
-	JMenuItem ppAddTask = new JMenuItem();
+	JMenuItem ppAddSubTask = new JMenuItem();
 	JMenuItem ppCalcTask = new JMenuItem();
 	DailyItemsPanel parentPanel = null;
 
-    public ProcessPanel(DailyItemsPanel _parentPanel) {
+    public TaskPanel(DailyItemsPanel _parentPanel) {
         try {
             parentPanel = _parentPanel;
             jbInit();
@@ -99,82 +99,82 @@ public class ProcessPanel extends JPanel {
         historyForwardB.setMaximumSize(new Dimension(24, 24));
         historyForwardB.setText("");
 
-        newProcessB.setIcon(
+        newTaskB.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new.png")));
-        newProcessB.setEnabled(true);
-        newProcessB.setMaximumSize(new Dimension(24, 24));
-        newProcessB.setMinimumSize(new Dimension(24, 24));
-        newProcessB.setToolTipText(Local.getString("Create new process"));
-        newProcessB.setRequestFocusEnabled(false);
-        newProcessB.setPreferredSize(new Dimension(24, 24));
-        newProcessB.setFocusable(false);
-        newProcessB.addActionListener(new java.awt.event.ActionListener() {
+        newTaskB.setEnabled(true);
+        newTaskB.setMaximumSize(new Dimension(24, 24));
+        newTaskB.setMinimumSize(new Dimension(24, 24));
+        newTaskB.setToolTipText(Local.getString("Create new task"));
+        newTaskB.setRequestFocusEnabled(false);
+        newTaskB.setPreferredSize(new Dimension(24, 24));
+        newTaskB.setFocusable(false);
+        newTaskB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                newProcess_actionPerformed(e);
+                newTaskB_actionPerformed(e);
             }
         });
-        newProcessB.setBorderPainted(false);
+        newTaskB.setBorderPainted(false);
         
-        addTaskB.setIcon(
+        subTaskB.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new_sub.png")));
-        addTaskB.setEnabled(true);
-        addTaskB.setMaximumSize(new Dimension(24, 24));
-        addTaskB.setMinimumSize(new Dimension(24, 24));
-        addTaskB.setToolTipText(Local.getString("Add task"));
-        addTaskB.setRequestFocusEnabled(false);
-        addTaskB.setPreferredSize(new Dimension(24, 24));
-        addTaskB.setFocusable(false);
-        addTaskB.addActionListener(new java.awt.event.ActionListener() {
+        subTaskB.setEnabled(true);
+        subTaskB.setMaximumSize(new Dimension(24, 24));
+        subTaskB.setMinimumSize(new Dimension(24, 24));
+        subTaskB.setToolTipText(Local.getString("Add subtask"));
+        subTaskB.setRequestFocusEnabled(false);
+        subTaskB.setPreferredSize(new Dimension(24, 24));
+        subTaskB.setFocusable(false);
+        subTaskB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                addTask_actionPerformed(e);
+                addSubTask_actionPerformed(e);
             }
         });
-        addTaskB.setBorderPainted(false);
+        subTaskB.setBorderPainted(false);
 
-        editB.setBorderPainted(false);
-        editB.setFocusable(false);
-        editB.addActionListener(new java.awt.event.ActionListener() {
+        editTaskB.setBorderPainted(false);
+        editTaskB.setFocusable(false);
+        editTaskB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                edit_actionPerformed(e);
+                editTaskB_actionPerformed(e);
             }
         });
-        editB.setPreferredSize(new Dimension(24, 24));
-        editB.setRequestFocusEnabled(false);
-        editB.setToolTipText(Local.getString("Edit"));
-        editB.setMinimumSize(new Dimension(24, 24));
-        editB.setMaximumSize(new Dimension(24, 24));
-//        editB.setEnabled(true);
-        editB.setIcon(
+        editTaskB.setPreferredSize(new Dimension(24, 24));
+        editTaskB.setRequestFocusEnabled(false);
+        editTaskB.setToolTipText(Local.getString("Edit task"));
+        editTaskB.setMinimumSize(new Dimension(24, 24));
+        editTaskB.setMaximumSize(new Dimension(24, 24));
+//        editTaskB.setEnabled(true);
+        editTaskB.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_edit.png")));
 
-        removeB.setBorderPainted(false);
-        removeB.setFocusable(false);
-        removeB.addActionListener(new java.awt.event.ActionListener() {
+        removeTaskB.setBorderPainted(false);
+        removeTaskB.setFocusable(false);
+        removeTaskB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                remove_actionPerformed(e);
+                removeTaskB_actionPerformed(e);
             }
         });
-        removeB.setPreferredSize(new Dimension(24, 24));
-        removeB.setRequestFocusEnabled(false);
-        removeB.setToolTipText(Local.getString("Remove"));
-        removeB.setMinimumSize(new Dimension(24, 24));
-        removeB.setMaximumSize(new Dimension(24, 24));
-        removeB.setIcon(
+        removeTaskB.setPreferredSize(new Dimension(24, 24));
+        removeTaskB.setRequestFocusEnabled(false);
+        removeTaskB.setToolTipText(Local.getString("Remove task"));
+        removeTaskB.setMinimumSize(new Dimension(24, 24));
+        removeTaskB.setMaximumSize(new Dimension(24, 24));
+        removeTaskB.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_remove.png")));
         
-        completeB.setBorderPainted(false);
-        completeB.setFocusable(false);
-        completeB.addActionListener(new java.awt.event.ActionListener() {
+        completeTaskB.setBorderPainted(false);
+        completeTaskB.setFocusable(false);
+        completeTaskB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                complete_actionPerformed(e);
+                ppCompleteTask_actionPerformed(e);
             }
         });
-        completeB.setPreferredSize(new Dimension(24, 24));
-        completeB.setRequestFocusEnabled(false);
-        completeB.setToolTipText(Local.getString("Complete"));
-        completeB.setMinimumSize(new Dimension(24, 24));
-        completeB.setMaximumSize(new Dimension(24, 24));
-        completeB.setIcon(
+        completeTaskB.setPreferredSize(new Dimension(24, 24));
+        completeTaskB.setRequestFocusEnabled(false);
+        completeTaskB.setToolTipText(Local.getString("Complete task"));
+        completeTaskB.setMinimumSize(new Dimension(24, 24));
+        completeTaskB.setMaximumSize(new Dimension(24, 24));
+        completeTaskB.setIcon(
             new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_complete.png")));
 
 		// added by rawsushi
@@ -233,42 +233,42 @@ public class ProcessPanel extends JPanel {
         scrollPane.getViewport().setBackground(Color.white);
         /*taskTable.setMaximumSize(new Dimension(32767, 32767));
         taskTable.setRowHeight(24);*/
-        ppEdit.setFont(new java.awt.Font("Dialog", 1, 11));
-    ppEdit.setText(Local.getString("Edit")+"...");
-    ppEdit.addActionListener(new java.awt.event.ActionListener() {
+        ppEditTask.setFont(new java.awt.Font("Dialog", 1, 11));
+    ppEditTask.setText(Local.getString("Edit task")+"...");
+    ppEditTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                edit_actionPerformed(e);
+                ppEditTask_actionPerformed(e);
             }
         });
-    ppEdit.setEnabled(false);
-    ppEdit.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_edit.png")));
-    ppMenu.setFont(new java.awt.Font("Dialog", 1, 10));
-    ppRemove.setFont(new java.awt.Font("Dialog", 1, 11));
-    ppRemove.setText(Local.getString("Remove"));
-    ppRemove.addActionListener(new java.awt.event.ActionListener() {
+    ppEditTask.setEnabled(false);
+    ppEditTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_edit.png")));
+    taskPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
+    ppRemoveTask.setFont(new java.awt.Font("Dialog", 1, 11));
+    ppRemoveTask.setText(Local.getString("Remove task"));
+    ppRemoveTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                remove_actionPerformed(e);
+                ppRemoveTask_actionPerformed(e);
             }
         });
-    ppRemove.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_remove.png")));
-    ppRemove.setEnabled(false);
-    ppNewProcess.setFont(new java.awt.Font("Dialog", 1, 11));
-    ppNewProcess.setText(Local.getString("Create new process")+"...");
-    ppNewProcess.addActionListener(new java.awt.event.ActionListener() {
+    ppRemoveTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_remove.png")));
+    ppRemoveTask.setEnabled(false);
+    ppNewTask.setFont(new java.awt.Font("Dialog", 1, 11));
+    ppNewTask.setText(Local.getString("New task")+"...");
+    ppNewTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                newProcess_actionPerformed(e);
+                ppNewTask_actionPerformed(e);
             }
         });
-    ppNewProcess.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new.png")));
+    ppNewTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new.png")));
 
-    ppAddTask.setFont(new java.awt.Font("Dialog", 1, 11));
-    ppAddTask.setText(Local.getString("Add task"));
-    ppAddTask.addActionListener(new java.awt.event.ActionListener() {
+    ppAddSubTask.setFont(new java.awt.Font("Dialog", 1, 11));
+    ppAddSubTask.setText(Local.getString("Add subtask"));
+    ppAddSubTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                addTask_actionPerformed(e);
+                ppAddSubTask_actionPerformed(e);
             }
         });
-    ppAddTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new_sub.png")));
+    ppAddSubTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new_sub.png")));
 
     /*
     ppSubTasks.setFont(new java.awt.Font("Dialog", 1, 11));
@@ -290,21 +290,21 @@ public class ProcessPanel extends JPanel {
     ppParentTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_new.png")));
     */
 
-	ppComplete.setFont(new java.awt.Font("Dialog", 1, 11));
-	ppComplete.setText(Local.getString("Complete"));
-	ppComplete.addActionListener(new java.awt.event.ActionListener() {
+	ppCompleteTask.setFont(new java.awt.Font("Dialog", 1, 11));
+	ppCompleteTask.setText(Local.getString("Complete task"));
+	ppCompleteTask.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				complete_actionPerformed(e);
+				ppCompleteTask_actionPerformed(e);
 			}
 		});
-	ppComplete.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_complete.png")));
-	ppComplete.setEnabled(false);
+	ppCompleteTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_complete.png")));
+	ppCompleteTask.setEnabled(false);
 
 	ppCalcTask.setFont(new java.awt.Font("Dialog", 1, 11));
-	ppCalcTask.setText(Local.getString("Calculate data"));
+	ppCalcTask.setText(Local.getString("Calculate task data"));
 	ppCalcTask.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				calcTask_actionPerformed(e);
+				ppCalcTask_actionPerformed(e);
 			}
 		});
 	ppCalcTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_complete.png")));
@@ -316,12 +316,12 @@ public class ProcessPanel extends JPanel {
         tasksToolBar.add(historyForwardB, null);
         tasksToolBar.addSeparator(new Dimension(8, 24));
 
-        tasksToolBar.add(newProcessB, null);
-        tasksToolBar.add(addTaskB, null);
-        tasksToolBar.add(removeB, null);
+        tasksToolBar.add(newTaskB, null);
+        tasksToolBar.add(subTaskB, null);
+        tasksToolBar.add(removeTaskB, null);
         tasksToolBar.addSeparator(new Dimension(8, 24));
-        tasksToolBar.add(editB, null);
-        tasksToolBar.add(completeB, null);
+        tasksToolBar.add(editTaskB, null);
+        tasksToolBar.add(completeTaskB, null);
 
 		//tasksToolBar.add(showActiveOnly, null);
         
@@ -336,12 +336,12 @@ public class ProcessPanel extends JPanel {
 
         CurrentDate.addDateListener(new DateListener() {
             public void dateChange(CalendarDate d) {
-                newProcessB.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get().getEndDate()));
+                newTaskB.setEnabled(d.inPeriod(CurrentProject.get().getStartDate(), CurrentProject.get().getEndDate()));
             }
         });
         CurrentProject.addProjectListener(new ProjectListener() {
             public void projectChange(Project p, NoteList nl, TaskList tl, ResourcesList rl) {
-                newProcessB.setEnabled(
+                newTaskB.setEnabled(
                     CurrentDate.get().inPeriod(p.getStartDate(), p.getEndDate()));
             }
             public void projectWasChanged() {
@@ -351,12 +351,12 @@ public class ProcessPanel extends JPanel {
         taskTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 boolean enbl = (taskTable.getRowCount() > 0)&&(taskTable.getSelectedRow() > -1);
-                editB.setEnabled(enbl);ppEdit.setEnabled(enbl);
-                removeB.setEnabled(enbl);ppRemove.setEnabled(enbl);
+                editTaskB.setEnabled(enbl);ppEditTask.setEnabled(enbl);
+                removeTaskB.setEnabled(enbl);ppRemoveTask.setEnabled(enbl);
 				
-				ppComplete.setEnabled(enbl);
-				completeB.setEnabled(enbl);
-				ppAddTask.setEnabled(enbl);
+				ppCompleteTask.setEnabled(enbl);
+				completeTaskB.setEnabled(enbl);
+				ppAddSubTask.setEnabled(enbl);
 				//ppSubTasks.setEnabled(enbl); // default value to be over-written later depending on whether it has sub tasks
 				ppCalcTask.setEnabled(enbl); // default value to be over-written later depending on whether it has sub tasks
 				
@@ -383,32 +383,32 @@ public class ProcessPanel extends JPanel {
                 }
             }
         });
-        editB.setEnabled(false);
-        removeB.setEnabled(false);
-		completeB.setEnabled(false);
-		ppAddTask.setEnabled(false);
+        editTaskB.setEnabled(false);
+        removeTaskB.setEnabled(false);
+		completeTaskB.setEnabled(false);
+		ppAddSubTask.setEnabled(false);
 		//ppSubTasks.setEnabled(false);
 		//ppParentTask.setEnabled(false);
-    ppMenu.add(ppEdit);
+    taskPPMenu.add(ppEditTask);
     
-    ppMenu.addSeparator();
-    ppMenu.add(ppNewProcess);
-    ppMenu.add(ppAddTask);
-    ppMenu.add(ppRemove);
+    taskPPMenu.addSeparator();
+    taskPPMenu.add(ppNewTask);
+    taskPPMenu.add(ppAddSubTask);
+    taskPPMenu.add(ppRemoveTask);
     
-    ppMenu.addSeparator();
-	ppMenu.add(ppComplete);
-	ppMenu.add(ppCalcTask);
+    taskPPMenu.addSeparator();
+	taskPPMenu.add(ppCompleteTask);
+	taskPPMenu.add(ppCalcTask);
 	
-    //ppMenu.addSeparator();
+    //taskPPMenu.addSeparator();
     
-    //ppMenu.add(ppSubTasks);
+    //taskPPMenu.add(ppSubTasks);
     
-    //ppMenu.addSeparator();
-    //ppMenu.add(ppParentTask);
+    //taskPPMenu.addSeparator();
+    //taskPPMenu.add(ppParentTask);
     
-    ppMenu.addSeparator();
-	ppMenu.add(ppShowActiveOnlyChB);
+    taskPPMenu.addSeparator();
+	taskPPMenu.add(ppShowActiveOnlyChB);
 
 	
 		// define key actions in TaskPanel:
@@ -420,20 +420,20 @@ public class ProcessPanel extends JPanel {
 			public void keyPressed(KeyEvent e){
 				if(taskTable.getSelectedRows().length>0 
 					&& e.getKeyCode()==KeyEvent.VK_DELETE)
-					remove_actionPerformed(null);
+					ppRemoveTask_actionPerformed(null);
 				
 				else if(e.getKeyCode()==KeyEvent.VK_INSERT) {
 					if(taskTable.getSelectedRows().length>0) {
-						addTask_actionPerformed(null);
+						ppAddSubTask_actionPerformed(null);
 					}
 					else {
-						newProcess_actionPerformed(null);						
+						ppNewTask_actionPerformed(null);						
 					}
 				}
 				
 				else if(e.getKeyCode()==KeyEvent.VK_SPACE
 						&& taskTable.getSelectedRows().length>0) {
-					complete_actionPerformed(null);
+					ppCompleteTask_actionPerformed(null);
 				}
 			}
 			public void	keyReleased(KeyEvent e){}
@@ -442,11 +442,11 @@ public class ProcessPanel extends JPanel {
 
     }
 
-    void edit_actionPerformed(ActionEvent e) {
+    void editTaskB_actionPerformed(ActionEvent e) {
         Task t =
             CurrentProject.getTaskList().getTask(
                 taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID).toString());
-        TaskDialog dlg = new TaskDialog(App.getFrame(), Local.getString("Edit Process"));
+        TaskDialog dlg = new TaskDialog(App.getFrame(), Local.getString("Edit task"));
         Dimension frmSize = App.getFrame().getSize();
         Point loc = App.getFrame().getLocation();
         dlg.setLocation((frmSize.width - dlg.getSize().width) / 2 + loc.x, (frmSize.height - dlg.getSize().height) / 2 + loc.y);
@@ -488,8 +488,8 @@ public class ProcessPanel extends JPanel {
         //taskTable.updateUI();
     }
 
-    void newProcess_actionPerformed(ActionEvent e) {
-        ProcessDialog dlg = new ProcessDialog(App.getFrame(), Local.getString("New Process"));
+    void newTaskB_actionPerformed(ActionEvent e) {
+        TaskDialog dlg = new TaskDialog(App.getFrame(), Local.getString("New task"));
         
         //XXX String parentTaskId = taskTable.getCurrentRootTask();
         
@@ -510,7 +510,7 @@ public class ProcessPanel extends JPanel {
  			ed = null;
         long effort = Util.getMillisFromHours(dlg.effortField.getText());
 		//XXX Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(),parentTaskId);
-		Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.nameField.getText(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(),null);
+		Task newTask = CurrentProject.getTaskList().createTask(sd, ed, dlg.todoField.getText(), dlg.priorityCB.getSelectedIndex(),effort, dlg.descriptionField.getText(),null);
 //		CurrentProject.getTaskList().adjustParentTasks(newTask);
 		newTask.setProgress(((Integer)dlg.progress.getValue()).intValue());
         CurrentStorage.get().storeTaskList(CurrentProject.getTaskList(), CurrentProject.get());
@@ -519,8 +519,8 @@ public class ProcessPanel extends JPanel {
         //taskTable.updateUI();
     }
 
-    void addTask_actionPerformed(ActionEvent e) {
-        TaskDialog dlg = new TaskDialog(App.getFrame(), Local.getString("New task"));
+    void addSubTask_actionPerformed(ActionEvent e) {
+        TaskDialog dlg = new TaskDialog(App.getFrame(), Local.getString("New Task"));
         String parentTaskId = taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID).toString();
         
 //        Util.debug("Adding sub task under " + parentTaskId);
@@ -635,7 +635,7 @@ public class ProcessPanel extends JPanel {
 //      //taskTable.updateUI();
   }
 
-    void remove_actionPerformed(ActionEvent e) {
+    void removeTaskB_actionPerformed(ActionEvent e) {
         String msg;
         String thisTaskId = taskTable.getModel().getValueAt(taskTable.getSelectedRow(), TaskTable.TASK_ID).toString();
         
@@ -644,7 +644,7 @@ public class ProcessPanel extends JPanel {
              + "\n"+Local.getString("Are you sure?");
         else {        	
         	Task t = CurrentProject.getTaskList().getTask(thisTaskId);
-        	// check if there are tasks
+        	// check if there are subtasks
 			if(CurrentProject.getTaskList().hasSubTasks(thisTaskId)) {
 				msg = Local.getString("Remove task")+"\n'" + t.getText() + Local.getString("' and all subtasks") +"\n"+Local.getString("Are you sure?");
 			}
@@ -678,7 +678,7 @@ public class ProcessPanel extends JPanel {
 
     }
 
-	void complete_actionPerformed(ActionEvent e) {
+	void ppCompleteTask_actionPerformed(ActionEvent e) {
 		String msg;
 		Vector tocomplete = new Vector();
 		for (int i = 0; i < taskTable.getSelectedRows().length; i++) {
@@ -713,7 +713,7 @@ public class ProcessPanel extends JPanel {
 			// ignore "tree" column
 			//if(taskTable.getSelectedColumn() == 1) return;
 			
-			edit_actionPerformed(null);
+			editTaskB_actionPerformed(null);
 		}
         }
 
@@ -727,9 +727,36 @@ public class ProcessPanel extends JPanel {
 
                 private void maybeShowPopup(MouseEvent e) {
                     if (e.isPopupTrigger()) {
-                        ppMenu.show(e.getComponent(), e.getX(), e.getY());
+                        taskPPMenu.show(e.getComponent(), e.getX(), e.getY());
                     }
                 }
 
     }
+
+  void ppEditTask_actionPerformed(ActionEvent e) {
+    editTaskB_actionPerformed(e);
+  }
+  void ppRemoveTask_actionPerformed(ActionEvent e) {
+    removeTaskB_actionPerformed(e);
+  }
+  void ppNewTask_actionPerformed(ActionEvent e) {
+    newTaskB_actionPerformed(e);
+  }
+
+  void ppAddSubTask_actionPerformed(ActionEvent e) {
+  	addSubTask_actionPerformed(e);
+  }
+
+  void ppListSubTasks_actionPerformed(ActionEvent e) {
+  	listSubTasks_actionPerformed(e);
+  }
+
+  void ppParentTask_actionPerformed(ActionEvent e) {
+  	parentTask_actionPerformed(e);
+  }
+
+  void ppCalcTask_actionPerformed(ActionEvent e) {
+      calcTask_actionPerformed(e);
+  }
+
 }

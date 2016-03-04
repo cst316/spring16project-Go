@@ -36,6 +36,7 @@ public class WorkPanel extends JPanel {
 	public ResourcesPanel filesPanel = new ResourcesPanel();
 	public JButton agendaB = new JButton();
 	public JButton processesB = new JButton();
+	public JButton tasksB = new JButton();
 	public JButton eventsB = new JButton();
 	public JButton filesB = new JButton();
 	JButton currentB = null;
@@ -144,6 +145,31 @@ public class WorkPanel extends JPanel {
 		processesB.setOpaque(false);
 		processesB.setMaximumSize(new Dimension(60, 80));
 		processesB.setBackground(Color.white);
+		
+		tasksB.setSelected(true);
+		tasksB.setFont(new java.awt.Font("Dialog", 1, 10));
+		tasksB.setMargin(new Insets(0, 0, 0, 0));
+		tasksB.setIcon(
+			new ImageIcon(
+				net.sf.memoranda.ui.AppFrame.class.getResource(
+					"resources/icons/tasks.png")));
+		tasksB.setVerticalTextPosition(SwingConstants.BOTTOM);
+		tasksB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tasksB_actionPerformed(e);
+			}
+		});
+		tasksB.setVerticalAlignment(SwingConstants.TOP);
+		tasksB.setText(Local.getString("Tasks"));
+		tasksB.setHorizontalTextPosition(SwingConstants.CENTER);
+		tasksB.setFocusPainted(false);
+		tasksB.setBorderPainted(false);
+		tasksB.setContentAreaFilled(false);
+		tasksB.setPreferredSize(new Dimension(50, 50));
+		tasksB.setMinimumSize(new Dimension(30, 30));
+		tasksB.setOpaque(false);
+		tasksB.setMaximumSize(new Dimension(60, 80));
+		tasksB.setBackground(Color.white);
 
 		notesB.setFont(new java.awt.Font("Dialog", 1, 10));
 		notesB.setBackground(Color.white);
@@ -203,6 +229,7 @@ public class WorkPanel extends JPanel {
 		toolBar.add(agendaB, null);
 		toolBar.add(eventsB, null);
 		toolBar.add(processesB, null);
+		toolBar.add(tasksB, null);
 		toolBar.add(notesB, null);
 		toolBar.add(filesB, null);
 		currentB = agendaB;
@@ -223,6 +250,8 @@ public class WorkPanel extends JPanel {
 				notesB_actionPerformed(null);
 			else if (pan.equals("PROCESSES"))
 				processesB_actionPerformed(null);
+			else if (pan.equals("TASKS"))
+				tasksB_actionPerformed(null);
 			else if (pan.equals("EVENTS"))
 				eventsB_actionPerformed(null);
 			else if (pan.equals("FILES"))
@@ -249,6 +278,13 @@ public class WorkPanel extends JPanel {
 		dailyItemsPanel.selectPanel("PROCESSES");
 		setCurrentButton(processesB);
 		Context.put("CURRENT_PANEL", "PROCESSES");
+	}
+	
+	public void tasksB_actionPerformed(ActionEvent e) {
+		cardLayout1.show(panel, "DAILYITEMS");
+		dailyItemsPanel.selectPanel("TASKS");
+		setCurrentButton(tasksB);
+		Context.put("CURRENT_PANEL", "TASKS");
 	}
 
 	public void eventsB_actionPerformed(ActionEvent e) {
