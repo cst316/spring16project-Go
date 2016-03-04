@@ -185,7 +185,7 @@ public class DailyItemsPanel extends JPanel {
             }
         });
         processesB.setPreferredSize(new Dimension(24, 24));
-        processesB.setToolTipText(Local.getString("Active to-do tasks"));
+        processesB.setToolTipText(Local.getString("Active Processes"));
         processesB.setBorderPainted(false);
         processesB.setMaximumSize(new Dimension(24, 24));
         processesB.setOpaque(false);
@@ -219,7 +219,8 @@ public class DailyItemsPanel extends JPanel {
         
         editorsPanel.add(agendaPanel, "AGENDA");
         editorsPanel.add(eventsPanel, "EVENTS");
-        editorsPanel.add(tasksPanel, "PROCESSES");
+        editorsPanel.add(processesPanel, "PROCESSES");
+        editorsPanel.add(tasksPanel, "TASKS");
         editorsPanel.add(editorPanel, "NOTES");
         
         splitPane.add(mainPanel, JSplitPane.RIGHT);
@@ -460,6 +461,7 @@ public class DailyItemsPanel extends JPanel {
     }
 
     public void selectPanel(String pan) {
+    	
         if (calendar.jnCalendar.renderer.getTask() != null) {
             calendar.jnCalendar.renderer.setTask(null);
          //   calendar.jnCalendar.updateUI();
