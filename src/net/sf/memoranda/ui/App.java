@@ -52,13 +52,17 @@ public class App {
 			init();
 	}
 
-	public App(boolean fullmode) {
+	public App() {
 		super();
+		/*
 		if (fullmode)
 			fullmode = !Configuration.get("START_MINIMIZED").equals("yes");
+		*/
 		/* DEBUG */
+		/*
 		if (!fullmode)
-			System.out.println("Minimized mode");
+			fullmode = !Configuration.get("START_MINIMIZED").equals("no");
+		*/
 		if (!Configuration.get("SHOW_SPLASH").equals("no"))
 			showSplash();
 		System.out.println(VERSION_INFO);
@@ -92,9 +96,9 @@ public class App {
 
 		EventsScheduler.init();
 		frame = new AppFrame();
-		if (fullmode) {
-			init();
-		}
+		
+		init();
+		
 		if (!Configuration.get("SHOW_SPLASH").equals("no"))
 			splash.dispose();
 	}
@@ -144,10 +148,21 @@ public class App {
 		frame.dispose();
 	}
 	
+	public static void minimize(boolean min){
+		if (min)
+			frame.setExtendedState(Frame.ICONIFIED);
+		else
+			closeWindow();
+	}
+	
 	//Method minimize
 	public static void minimize(){
-		frame.setExtendedState(Frame.ICONIFIED);
+		if (Configuration.get("ON_MINIMIZE").equals("normal"))
+			minimize(true);
+		else
+			minimize(false);
 	}
+	
 	/**
 	 * Method showSplash.
 	 */

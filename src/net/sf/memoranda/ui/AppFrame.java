@@ -139,7 +139,7 @@ public class AppFrame extends JFrame {
         };
     
     JMenuItem jMenuFileNewPrj = new JMenuItem();
-        JMenuItem jMenuFileNewNote = new JMenuItem(workPanel.dailyItemsPanel.editorPanel.newAction);
+    JMenuItem jMenuFileNewNote = new JMenuItem(workPanel.dailyItemsPanel.editorPanel.newAction);
     JMenuItem jMenuFilePackPrj = new JMenuItem(prjPackAction);
     JMenuItem jMenuFileUnpackPrj = new JMenuItem(prjUnpackAction);
     JMenuItem jMenuFileExportPrj = new JMenuItem(exportNotesAction);
@@ -557,7 +557,6 @@ public class AppFrame extends JFrame {
         splitPane.setBorder(null);
         workPanel.setBorder(null);
 
-        setEnabledEditorMenus(false);
 
         projectsPanel.AddExpandListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -578,55 +577,16 @@ public class AppFrame extends JFrame {
             }
         };
 
-        this.workPanel.dailyItemsPanel.taskB
+        this.workPanel.dailyItemsPanel.processesB
                 .addActionListener(setMenusDisabled);
         this.workPanel.dailyItemsPanel.alarmB.addActionListener(
                 setMenusDisabled);
-//Add some comment
-/*          ######Old Code#######
-        this.workPanel.tasksB.addActionListener(setMenusDisabled);
+        
+        
+        this.workPanel.processesB.addActionListener(setMenusDisabled);
         this.workPanel.eventsB.addActionListener(setMenusDisabled);
         this.workPanel.filesB.addActionListener(setMenusDisabled);
-        this.workPanel.agendaB.addActionListener(setMenusDisabled);
-*/
-        
-
-/*    ######Enable the Edit, Insert and Format in Agenda,Events,Task and Resources.###### */
-        this.workPanel.filesB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                });
-      
-        this.workPanel.filesB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                }); 
-        
-        this.workPanel.tasksB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                });
-  
-        this.workPanel.eventsB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                });
-       
-        this.workPanel.agendaB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                });
-///////////////////////////////////////////////////////////////////////////////////////////////////        
+        this.workPanel.agendaB.addActionListener(setMenusDisabled);        
         this.workPanel.notesB.addActionListener(
                 new java.awt.event.ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -655,8 +615,7 @@ public class AppFrame extends JFrame {
         String pan = (String) Context.get("CURRENT_PANEL");
         if (pan != null) {
             workPanel.selectPanel(pan);
-            setEnabledEditorMenus(pan.equalsIgnoreCase("NOTES"));
-        }
+            setEnabledEditorMenus(pan.equalsIgnoreCase("NOTES"));        }
 
         CurrentProject.addProjectListener(new ProjectListener() {
 
@@ -726,8 +685,7 @@ public class AppFrame extends JFrame {
             if (Configuration.get("ON_CLOSE").equals("exit"))
                 doExit();
             else{
-            	exitNotify();
-            	App.closeWindow();
+            	doMinimize();
             }
                 
         }

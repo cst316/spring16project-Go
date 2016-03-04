@@ -43,15 +43,16 @@ public class PreferencesDialog extends JDialog {
 
 	JLabel jLabel3 = new JLabel();
 
-	ButtonGroup lfGroup = new ButtonGroup();
+	
 
 	JRadioButton lfSystemRB = new JRadioButton();
-
 	JRadioButton lfJavaRB = new JRadioButton();
-
 	JRadioButton lfCustomRB = new JRadioButton();
 
-	JLabel classNameLabel = new JLabel();
+    ButtonGroup lfGroup = new ButtonGroup();
+	
+    
+    JLabel classNameLabel = new JLabel();
 
 	JTextField lfClassName = new JTextField();
 
@@ -291,6 +292,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.gridy = 4;
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
+		lfGroup.add(lfSystemRB);
 		lfSystemRB.setText(Local.getString("System"));
 		lfSystemRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -304,6 +306,8 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(lfSystemRB, gbc);
+		//Added Comments
+		lfGroup.add(lfJavaRB);
 		lfJavaRB.setText(Local.getString("Default"));
 		lfJavaRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {

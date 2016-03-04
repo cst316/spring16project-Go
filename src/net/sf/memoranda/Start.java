@@ -59,11 +59,18 @@ public class Start {
         }
         
         //System.out.println(EventsScheduler.isEventScheduled());
+        /*
         if ((args.length == 0) || (!args[0].equals("-m"))) {
             app = new App(true);
         }
         else
             app = new App(false);
+        */
+        app = new App();
+        
+        if (Configuration.get("START_MINIMIZED").equals("yes")) {
+        	app.minimize(true);
+        }
     }
 }
 
