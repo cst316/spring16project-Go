@@ -44,7 +44,7 @@ public class ExportSticker {
          */
         public static String remove1(String input) {
             
-            String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
+            String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ"; //change UTF8
             
             String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
             String output = input;
