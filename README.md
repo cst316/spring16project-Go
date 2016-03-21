@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/cst316/spring16project-Go.svg?branch=master)](https://travis-ci.org/cst316/spring16project-Go)
-# spring16project
+# spring16project[![Build Status](https://travis-ci.org/cst316/spring16project-Go.svg?branch=master)](https://travis-ci.org/cst316/spring16project-Go)
+
 This is the initial dump for the cst316 spring 2016 project. It is a slightly modified version of the Memoranda project from memoranda.sf.net
 
 The purpose of this project is to enhance the Memoranda application to support Time Management for Software Engineers. In essence, to augment Memoranda with features that support the time management concepts in the Personal Software Process, which you learned some of last year in SER215.
