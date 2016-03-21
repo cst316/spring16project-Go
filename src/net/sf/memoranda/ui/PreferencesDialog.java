@@ -372,7 +372,6 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(enSystrayChB, gbc);
 		startMinimizedChB.setText(Local.getString("Start minimized"));
-		startMinimizedChB.setEnabled(false);
 		
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
