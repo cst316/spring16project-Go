@@ -3,8 +3,8 @@
  * Created on 3.22.2016, 16:58:13 Alex
  * Package: net.sf.memoranda
  * 
- * @author Alex V. Alishevskikh, alex@openmechanics.net
- * Copyright (c) 2003 Memoranda Team. http://memoranda.sf.net
+ * @author David Diaz 
+ *
  */
 package net.sf.memoranda;
 
