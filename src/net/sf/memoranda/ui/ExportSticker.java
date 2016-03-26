@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import net.sf.memoranda.EventsManager
 import net.sf.memoranda.util.CurrentStorage;
 import net.sf.memoranda.util.Local;
 import nu.xom.Document;
