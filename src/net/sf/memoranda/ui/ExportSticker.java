@@ -1,4 +1,4 @@
-﻿package net.sf.memoranda.ui;
+package net.sf.memoranda.ui;
 
 import java.io.*;
 import java.nio.*;
