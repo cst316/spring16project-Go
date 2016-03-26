@@ -14,6 +14,7 @@ import net.sf.memoranda.util.Local;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Elements;
+//should be workings
 
 public class ExportSticker {
 
