@@ -22,6 +22,17 @@ public class PreferencesDialog extends JDialog {
 	JPanel GeneralPanel = new JPanel(new GridBagLayout());
 
 	GridBagConstraints gbc;
+	
+	//Added JLabel and more RadioButton(s)
+	JLabel userType = new JLabel();
+	
+	ButtonGroup userTypes = new ButtonGroup();
+	
+	JRadioButton heavyUserRB = new JRadioButton();
+	
+	JRadioButton casualUserRB = new JRadioButton();
+	
+	JRadioButton customUserRB = new JRadioButton();
 
 	JLabel jLabel1 = new JLabel();
 
@@ -632,6 +643,13 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	void apply() {
+		if(this.heavyUserRB.isSelected())
+			Configuration.put("USER_TYPE", "heavy");
+		else if(this.casualUserRB.isSelected())
+			Configuration.put("USER_TYPE", "casual");
+		else
+			Configuration.put("USER_TYPE", "custom");
+		
 		if (this.firstdow.isSelected())
 			Configuration.put("FIRST_DAY_OF_WEEK", "mon");
 		else
@@ -737,6 +755,12 @@ public class PreferencesDialog extends JDialog {
 		Configuration.saveConfig();
 		
 	}
+	
+	void customUser() {
+		this.heavyUserRB.setSelected(true);
+		this.casualUserRB.setSelected(true);
+		this.customUserRB.setSelected(true);
+	}
 
 	void enableCustomLF(boolean is) {
 		this.classNameLabel.setEnabled(is);
@@ -771,14 +795,15 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	void minTaskbarRB_actionPerformed(ActionEvent e) {
-
+		customUser();
 	}
 
 	void minHideRB_actionPerformed(ActionEvent e) {
-
+		customUser();
 	}
 
 	void closeExitRB_actionPerformed(ActionEvent e) {
+		customUser();
 		// this.askConfirmChB.setEnabled(true);
 	}
 
@@ -787,6 +812,7 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	void closeHideRB_actionPerformed(ActionEvent e) {
+		customUser();
 		// this.askConfirmChB.setEnabled(false);
 	}
 
