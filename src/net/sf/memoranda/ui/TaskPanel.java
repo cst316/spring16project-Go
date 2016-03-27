@@ -235,7 +235,7 @@ public class TaskPanel extends JPanel {
         /*taskTable.setMaximumSize(new Dimension(32767, 32767));
         taskTable.setRowHeight(24);*/
     ppGoToProcess.setFont(new java.awt.Font("Dialog", 1, 10));
-    ppGoToProcess.setText(Local.getString("NOT A TASK AND SUCH")+"...");
+    ppGoToProcess.setText(Local.getString("Go To Process")+"...");
     ppGoToProcess.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                 	ppGoToProcess_actionPerformed(e);
