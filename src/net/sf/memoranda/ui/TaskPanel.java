@@ -58,6 +58,7 @@ public class TaskPanel extends JPanel {
     TaskTable taskTable = new TaskTable();
 	JMenuItem ppEditTask = new JMenuItem();
 	JPopupMenu taskPPMenu = new JPopupMenu();
+	JMenuItem ppGoToProcess = new JMenuItem();
 	JMenuItem ppRemoveTask = new JMenuItem();
 	JMenuItem ppNewTask = new JMenuItem();
 	JMenuItem ppCompleteTask = new JMenuItem();
@@ -66,7 +67,7 @@ public class TaskPanel extends JPanel {
 	JMenuItem ppAddSubTask = new JMenuItem();
 	JMenuItem ppCalcTask = new JMenuItem();
 	DailyItemsPanel parentPanel = null;
-
+	
     public TaskPanel(DailyItemsPanel _parentPanel) {
         try {
             parentPanel = _parentPanel;
@@ -233,7 +234,16 @@ public class TaskPanel extends JPanel {
         scrollPane.getViewport().setBackground(Color.white);
         /*taskTable.setMaximumSize(new Dimension(32767, 32767));
         taskTable.setRowHeight(24);*/
-        ppEditTask.setFont(new java.awt.Font("Dialog", 1, 11));
+    ppGoToProcess.setFont(new java.awt.Font("Dialog", 1, 10));
+    ppGoToProcess.setText(Local.getString("NOT A TASK AND SUCH")+"...");
+    ppGoToProcess.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                	ppGoToProcess_actionPerformed(e);
+                }
+            });
+    ppGoToProcess.setEnabled(false);    
+
+    ppEditTask.setFont(new java.awt.Font("Dialog", 1, 11));
     ppEditTask.setText(Local.getString("Edit task")+"...");
     ppEditTask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -243,6 +253,7 @@ public class TaskPanel extends JPanel {
     ppEditTask.setEnabled(false);
     ppEditTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_edit.png")));
     taskPPMenu.setFont(new java.awt.Font("Dialog", 1, 10));
+  
     ppRemoveTask.setFont(new java.awt.Font("Dialog", 1, 11));
     ppRemoveTask.setText(Local.getString("Remove task"));
     ppRemoveTask.addActionListener(new java.awt.event.ActionListener() {
@@ -250,6 +261,10 @@ public class TaskPanel extends JPanel {
                 ppRemoveTask_actionPerformed(e);
             }
         });
+    
+
+   
+    
     ppRemoveTask.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/todo_remove.png")));
     ppRemoveTask.setEnabled(false);
     ppNewTask.setFont(new java.awt.Font("Dialog", 1, 11));
@@ -351,7 +366,8 @@ public class TaskPanel extends JPanel {
         taskTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 boolean enbl = (taskTable.getRowCount() > 0)&&(taskTable.getSelectedRow() > -1);
-                editTaskB.setEnabled(enbl);ppEditTask.setEnabled(enbl);
+                editTaskB.setEnabled(enbl);
+                ppEditTask.setEnabled(enbl);
                 removeTaskB.setEnabled(enbl);ppRemoveTask.setEnabled(enbl);
 				
 				ppCompleteTask.setEnabled(enbl);
@@ -389,7 +405,8 @@ public class TaskPanel extends JPanel {
 		ppAddSubTask.setEnabled(false);
 		//ppSubTasks.setEnabled(false);
 		//ppParentTask.setEnabled(false);
-    taskPPMenu.add(ppEditTask);
+    taskPPMenu.add(ppGoToProcess);
+	taskPPMenu.add(ppEditTask);
     
     taskPPMenu.addSeparator();
     taskPPMenu.add(ppNewTask);
@@ -704,6 +721,10 @@ public class TaskPanel extends JPanel {
 			"SHOW_ACTIVE_TASKS_ONLY",
 			new Boolean(ppShowActiveOnlyChB.isSelected()));
 		taskTable.tableChanged();
+	}
+	
+	void ppGoToProcess_actionPerformed(ActionEvent e){
+	//Insert gotoProcesses action here. 
 	}
 
     class PopupListener extends MouseAdapter {
