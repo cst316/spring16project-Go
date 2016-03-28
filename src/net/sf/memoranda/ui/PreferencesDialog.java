@@ -169,6 +169,22 @@ public class PreferencesDialog extends JDialog {
 				.getString("Sound"));
 		this.setResizable(false);
 		// Build Tab1
+		userType.setHorizontalAlignment(SwingConstants.RIGHT);
+		userType.setText(Local.getString("User Types:"));
+		gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(10, 10, 0, 15);
+		gbc.anchor = GridBagConstraints.EAST;
+		GeneralPanel.add(userType, gbc);
+		userTypes.add(heavyUserRB);
+		heavyUserRB.setText(Local.getString("Heavy Users"));
+		heavyUserRB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
 		jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel1.setText(Local.getString("Window minimize action:"));
 		gbc = new GridBagConstraints();
