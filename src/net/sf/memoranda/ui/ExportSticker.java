@@ -70,15 +70,11 @@ public class ExportSticker {
                         fwrite.write(contents);
 
                         fwrite.close();
-<<<<<<< HEAD
+
                         JOptionPane.showMessageDialog(null,Local.getString("Document Created in your memoranda folder"));
             
             
-=======
-                        JOptionPane.showMessageDialog(null,Local.getString("Documento creado con exito en su carpeta Memoranda =D"));
 
-
->>>>>>> origin/Sprint3
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null,Local.getString("Aren't able to create your document...."));

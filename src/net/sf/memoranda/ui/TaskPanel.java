@@ -241,7 +241,7 @@ public class TaskPanel extends JPanel {
                 	ppGoToProcess_actionPerformed(e);
                 }
             });
-    ppGoToProcess.setEnabled(false);    
+    ppGoToProcess.setEnabled(true);    
 
     ppEditTask.setFont(new java.awt.Font("Dialog", 1, 11));
     ppEditTask.setText(Local.getString("Edit task")+"...");
@@ -723,9 +723,7 @@ public class TaskPanel extends JPanel {
 		taskTable.tableChanged();
 	}
 	
-	void ppGoToProcess_actionPerformed(ActionEvent e){
-	//Insert gotoProcesses action here. 
-	}
+
 
     class PopupListener extends MouseAdapter {
 
@@ -753,7 +751,10 @@ public class TaskPanel extends JPanel {
                 }
 
     }
-
+  void ppGoToProcess_actionPerformed(ActionEvent e){
+	//Insert gotoProcesses action here. sss
+	  parentPanel.processesB_actionPerformed(null);
+	}
   void ppEditTask_actionPerformed(ActionEvent e) {
     editTaskB_actionPerformed(e);
   }
