@@ -182,7 +182,7 @@ public class PreferencesDialog extends JDialog {
 		heavyUserRB.setText(Local.getString("Heavy User"));
 		heavyUserRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				heavyUserRB_actionPerformed(e);
 			}
 		});
 		gbc = new GridBagConstraints();
@@ -196,7 +196,7 @@ public class PreferencesDialog extends JDialog {
 		casualUserRB.setText(Local.getString("Casual User"));
 		casualUserRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				casualUserRB_actionPerformed(e);
 			}
 		});
 		gbc = new GridBagConstraints();
@@ -208,7 +208,6 @@ public class PreferencesDialog extends JDialog {
 		
 		userTypes.add(customUserRB);
 		customUserRB.setText(Local.getString("Custom"));
-		customUserRB.setSelected(true);
 		customUserRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				customUser();
@@ -629,6 +628,14 @@ public class PreferencesDialog extends JDialog {
 		firstdow.setSelected(Configuration.get("FIRST_DAY_OF_WEEK").toString()
 				.equalsIgnoreCase("mon"));
 
+		String ut = Configuration.get("USER_TYPE").toString();
+		if(ut.equals("heavy"))
+			heavyUserRB.setSelected(true);
+		else if(ut.equals("casual"))
+			casualUserRB.setSelected(true);
+		else
+			customUserRB.setSelected(true);
+		
 		enableCustomLF(false);
 		String lf = Configuration.get("LOOK_AND_FEEL").toString();
 		if (lf.equalsIgnoreCase("system"))
@@ -845,6 +852,22 @@ public class PreferencesDialog extends JDialog {
 
 	}
 
+	void heavyUserRB_actionPerformed(ActionEvent e) {
+		minTaskbarRB.setSelected(true);
+		closeHideRB.setSelected(true);
+		enSystrayChB.setSelected(true);
+		startMinimizedChB.setSelected(true);
+		enSplashChB.setSelected(false);
+	}
+	
+	void casualUserRB_actionPerformed(ActionEvent e) {
+		minTaskbarRB.setSelected(true);
+		closeExitRB.setSelected(true);
+		enSystrayChB.setSelected(false);
+		startMinimizedChB.setSelected(false);
+		enSplashChB.setSelected(true);
+	}
+	
 	void okB_actionPerformed(ActionEvent e) {
 		apply();
 		this.dispose();
@@ -895,11 +918,11 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	void enSystrayChB_actionPerformed(ActionEvent e) {
-
+		customUser();
 	}
 
 	void enSplashChB_actionPerformed(ActionEvent e) {
-
+		customUser();
 	}
 
 	void enL10nChB_actionPerformed(ActionEvent e) {
