@@ -61,14 +61,14 @@ public interface Item {
     String getText();
     void setText(String s);
     
-    /*Collection getDependsFrom();
+    Collection getDependsFrom();
     
-    void addDependsFrom(Task task);
+    void addDependsFrom(Item item);
     
-    void removeDependsFrom(Task task);*/
-            
+    void removeDependsFrom(Item item);
+    
     Collection getSubItems();    
-    Item getSubItems(String id);
+    Item getSubItem(String id);
     
     boolean hasSubItems(String id);
     
@@ -79,7 +79,7 @@ public interface Item {
     String getDescription();
 
     Item getParentItem();
-    String getParentId();
+    String getParentItemId();
     
     void freeze();
     void unfreeze();

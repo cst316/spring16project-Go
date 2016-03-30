@@ -1,5 +1,5 @@
 /**
- * DefaultTask.java
+ * DefaultItem.java
  * Created on 12.02.2003, 15:30:40 Alex
  * Package: net.sf.memoranda
  *
@@ -22,17 +22,17 @@ import nu.xom.Node;
 /**
  *
  */
-/*$Id: TaskImpl.java,v 1.15 2005/12/01 08:12:26 alexeya Exp $*/
-public class TaskImpl implements Task, Comparable {
+/*$Id: ItemImpl.java,v 1.15 2005/12/01 08:12:26 alexeya Exp $*/
+public class ItemImpl implements Item, Comparable {
 
     private Element _element = null;
-    private TaskList _tl = null;
+    private ItemList _tl = null;
 
     /**
-     * Constructor for DefaultTask.
+     * Constructor for DefaultItem.
      */
-    public TaskImpl(Element taskElement, TaskList tl) {
-        _element = taskElement;
+    public ItemImpl(Element itemElement, ItemList tl) {
+        _element = itemElement;
         _tl = tl;
     }
 
@@ -52,7 +52,7 @@ public class TaskImpl implements Task, Comparable {
 		String ed = _element.getAttribute("endDate").getValue();
 		if (ed != "")
 			return new CalendarDate(_element.getAttribute("endDate").getValue());
-		Task parent = this.getParentTask();
+		Item parent = this.getParentItem();
 		if (parent != null)
 			return parent.getEndDate();
 		Project pr = this._tl.getProject();
@@ -88,20 +88,20 @@ public class TaskImpl implements Task, Comparable {
     }
 	
 	/* 
-	 * @see net.sf.memoranda.Task#getParentTask()
+	 * @see net.sf.memoranda.Item#getParentItem()
 	 */
-	public Task getParentTask() {
+	public Item getParentItem() {
 		Node parentNode = _element.getParent();
     	if (parentNode instanceof Element) {
     	    Element parent = (Element) parentNode;
-        	if (parent.getLocalName().equalsIgnoreCase("task")) 
-        	    return new TaskImpl(parent, _tl);
+        	if (parent.getLocalName().equalsIgnoreCase("item")) 
+        	    return new ItemImpl(parent, _tl);
     	}
     	return null;
 	}
 	
-	public String getParentId() {
-		Task parent = this.getParentTask();
+	public String getParentItemId() {
+		Item parent = this.getParentItem();
 		if (parent != null)
 			return parent.getID();
 		return null;
@@ -131,31 +131,31 @@ public class TaskImpl implements Task, Comparable {
     }
 
     /**s
-     * @see net.sf.memoranda.Task#getStatus()
+     * @see net.sf.memoranda.Item#getStatus()
      */
     public int getStatus(CalendarDate date) {
         CalendarDate start = getStartDate();
         CalendarDate end = getEndDate();
         if (isFrozen())
-            return Task.FROZEN;
+            return Item.FROZEN;
         if (isCompleted())
-                return Task.COMPLETED;
+                return Item.COMPLETED;
         
 		if (date.inPeriod(start, end)) {
             if (date.equals(end))
-                return Task.DEADLINE;
+                return Item.DEADLINE;
             else
-                return Task.ACTIVE;
+                return Item.ACTIVE;
         }
 		else if(date.before(start)) {
-				return Task.SCHEDULED;
+				return Item.SCHEDULED;
 		}
 		
 		if(start.after(end)) {
-			return Task.ACTIVE;
+			return Item.ACTIVE;
 		}
 
-        return Task.FAILED;
+        return Item.FAILED;
     }
     /**
      * Method isDependsCompleted.
@@ -182,14 +182,14 @@ public class TaskImpl implements Task, Comparable {
     }
 
     /**
-     * @see net.sf.memoranda.Task#getID()
+     * @see net.sf.memoranda.Item#getID()
      */
     public String getID() {
         return _element.getAttribute("id").getValue();
     }
 
     /**
-     * @see net.sf.memoranda.Task#getText()
+     * @see net.sf.memoranda.Item#getText()
      */
     public String getText() {
         return _element.getFirstChildElement("text").getValue();
@@ -200,7 +200,7 @@ public class TaskImpl implements Task, Comparable {
     }
     
     /**
-     * @see net.sf.memoranda.Task#setText()
+     * @see net.sf.memoranda.Item#setText()
      */
     public void setText(String s) {
         _element.getFirstChildElement("text").removeChildren();
@@ -208,14 +208,14 @@ public class TaskImpl implements Task, Comparable {
     }
 
     /**
-     * @see net.sf.memoranda.Task#freeze()
+     * @see net.sf.memoranda.Item#freeze()
      */
     public void freeze() {
         setAttr("frozen", "yes");
     }
 
     /**
-     * @see net.sf.memoranda.Task#unfreeze()
+     * @see net.sf.memoranda.Item#unfreeze()
      */
     public void unfreeze() {
         if (this.isFrozen())
@@ -223,64 +223,64 @@ public class TaskImpl implements Task, Comparable {
     }
 
     /**
-     * @see net.sf.memoranda.Task#getDependsFrom()
+     * @see net.sf.memoranda.Item#getDependsFrom()
      */
     public Collection getDependsFrom() {
         Vector v = new Vector();
         Elements deps = _element.getChildElements("dependsFrom");
         for (int i = 0; i < deps.size(); i++) {
             String id = deps.get(i).getAttribute("idRef").getValue();
-            Task t = _tl.getTask(id);
+            Item t = _tl.getItem(id);
             if (t != null)
                 v.add(t);
         }
         return v;
     }
     /**
-     * @see net.sf.memoranda.Task#addDependsFrom(net.sf.memoranda.Task)
+     * @see net.sf.memoranda.Item#addDependsFrom(net.sf.memoranda.Item)
      */
-    public void addDependsFrom(Task task) {
+    public void addDependsFrom(Item item) {
         Element dep = new Element("dependsFrom");
-        dep.addAttribute(new Attribute("idRef", task.getID()));
+        dep.addAttribute(new Attribute("idRef", item.getID()));
         _element.appendChild(dep);
     }
     /**
-     * @see net.sf.memoranda.Task#removeDependsFrom(net.sf.memoranda.Task)
+     * @see net.sf.memoranda.Item#removeDependsFrom(net.sf.memoranda.Item)
      */
-    public void removeDependsFrom(Task task) {
+    public void removeDependsFrom(Item item) {
         Elements deps = _element.getChildElements("dependsFrom");
         for (int i = 0; i < deps.size(); i++) {
             String id = deps.get(i).getAttribute("idRef").getValue();
-            if (id.equals(task.getID())) {
+            if (id.equals(item.getID())) {
                 _element.removeChild(deps.get(i));
                 return;
             }
         }
     }
     /**
-     * @see net.sf.memoranda.Task#getProgress()
+     * @see net.sf.memoranda.Item#getProgress()
      */
     public int getProgress() {
         return new Integer(_element.getAttribute("progress").getValue()).intValue();
     }
     /**
-     * @see net.sf.memoranda.Task#setProgress(int)
+     * @see net.sf.memoranda.Item#setProgress(int)
      */
     public void setProgress(int p) {
         if ((p >= 0) && (p <= 100))
             setAttr("progress", new Integer(p).toString());
     }
     /**
-     * @see net.sf.memoranda.Task#getPriority()
+     * @see net.sf.memoranda.Item#getPriority()
      */
     public int getPriority() {
         Attribute pa = _element.getAttribute("priority");
         if (pa == null)
-            return Task.PRIORITY_NORMAL;
+            return Item.PRIORITY_NORMAL;
         return new Integer(pa.getValue()).intValue();
     }
     /**
-     * @see net.sf.memoranda.Task#setPriority(int)
+     * @see net.sf.memoranda.Item#setPriority(int)
      */
     public void setPriority(int p) {
         setAttr("priority", String.valueOf(p));
@@ -295,7 +295,7 @@ public class TaskImpl implements Task, Comparable {
     }
 
 	/**
-	 * A "Task rate" is an informal index of importance of the task
+	 * An "Item rate" is an informal index of importance of the Item
 	 * considering priority, number of days to deadline and current 
 	 * progress. 
 	 * 
@@ -304,7 +304,7 @@ public class TaskImpl implements Task, Comparable {
 	 * @return long
 	 */
 
-	private long calcTaskRate(CalendarDate d) {
+	private long calcItemRate(CalendarDate d) {
 		Calendar endDateCal = getEndDate().getCalendar();
 		Calendar dateCal = d.getCalendar();
 		int numOfDays = (endDateCal.get(Calendar.YEAR)*365 + endDateCal.get(Calendar.DAY_OF_YEAR)) - 
@@ -314,7 +314,7 @@ public class TaskImpl implements Task, Comparable {
 	}
 
     /**
-     * @see net.sf.memoranda.Task#getRate()
+     * @see net.sf.memoranda.Item#getRate()
      */
 	 
      public long getRate() {
@@ -327,7 +327,7 @@ public class TaskImpl implements Task, Comparable {
 	   }
        return -1;
 */
-		return -1*calcTaskRate(CurrentDate.get());
+		return -1*calcItemRate(CurrentDate.get());
 	 }
 	   
 	 /*
@@ -335,105 +335,57 @@ public class TaskImpl implements Task, Comparable {
 	  */
 	  
 	 public int compareTo(Object o) {
-		 Task task = (Task) o;
-		 	if(getRate() > task.getRate())
+		 Item item = (Item) o;
+		 	if(getRate() > item.getRate())
 				return 1;
-			else if(getRate() < task.getRate())
+			else if(getRate() < item.getRate())
 				return -1;
 			else 
 				return 0;
 	 }
 	 
 	 public boolean equals(Object o) {
-	     return ((o instanceof Task) && (((Task)o).getID().equals(this.getID())));
+	     return ((o instanceof Item) && (((Item)o).getID().equals(this.getID())));
 	 }
 
 	/* 
-	 * @see net.sf.memoranda.Task#getSubTasks()
+	 * @see net.sf.memoranda.Item#getSubItems()
 	 */
-	public Collection getSubTasks() {
-		Elements subTasks = _element.getChildElements("task");
-            return convertToTaskObjects(subTasks);
+	public Collection getSubItems() {
+		Elements subItems = _element.getChildElements("item");
+            return convertToItemObjects(subItems);
 	}
 
-	private Collection convertToTaskObjects(Elements tasks) {
+	private Collection convertToItemObjects(Elements items) {
         Vector v = new Vector();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task t = new TaskImpl(tasks.get(i), _tl);
+        for (int i = 0; i < items.size(); i++) {
+            Item t = new ItemImpl(items.get(i), _tl);
             v.add(t);
         }
         return v;
     }
 	
 	/* 
-	 * @see net.sf.memoranda.Task#getSubTask(java.lang.String)
+	 * @see net.sf.memoranda.Item#getSubItem(java.lang.String)
 	 */
-	public Task getSubTask(String id) {
-		Elements subTasks = _element.getChildElements("task");
-		for (int i = 0; i < subTasks.size(); i++) {
-			if (subTasks.get(i).getAttribute("id").getValue().equals(id))
-				return new TaskImpl(subTasks.get(i), _tl);
+	public Item getSubItem(String id) {
+		Elements subItems = _element.getChildElements("item");
+		for (int i = 0; i < subItems.size(); i++) {
+			if (subItems.get(i).getAttribute("id").getValue().equals(id))
+				return new ItemImpl(subItems.get(i), _tl);
 		}
 		return null;
 	}
 
 	/* 
-	 * @see net.sf.memoranda.Task#hasSubTasks()
+	 * @see net.sf.memoranda.Item#hasSubItems()
 	 */
-	public boolean hasSubTasks(String id) {
-		Elements subTasks = _element.getChildElements("task");
-		for (int i = 0; i < subTasks.size(); i++) 
-			if (subTasks.get(i).getAttribute("id").getValue().equals(id))
+	public boolean hasSubItems(String id) {
+		Elements subItems = _element.getChildElements("item");
+		for (int i = 0; i < subItems.size(); i++) 
+			if (subItems.get(i).getAttribute("id").getValue().equals(id))
 				return true;
 		return false;
-	}
-
-	@Override
-	public void addDependsFrom(Item item) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeDependsFrom(Item item) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Collection getSubItems() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getSubItem(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean hasSubItems(String id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Item getParentItem() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getParentItemId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getParentTaskId() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	
