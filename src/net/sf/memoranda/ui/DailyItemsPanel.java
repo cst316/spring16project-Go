@@ -504,13 +504,13 @@ public class DailyItemsPanel extends JPanel {
 		return CurrentPanel;
 	}
     void processesB_actionPerformed(ActionEvent e) {
-        parentPanel.processesB_actionPerformed(null);
+         parentPanel.processesB_actionPerformed(null);
     }
     void tasksB_actionPerformed(ActionEvent e){
-    	parentPanel.tasksB_actionPerformed(null);
+    	 parentPanel.tasksB_actionPerformed(null);
     }
 
     void alarmB_actionPerformed(ActionEvent e) {
-        parentPanel.eventsB_actionPerformed(null);
+         parentPanel.eventsB_actionPerformed(null);
     }
 }
