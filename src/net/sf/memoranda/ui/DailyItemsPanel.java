@@ -324,6 +324,7 @@ public class DailyItemsPanel extends JPanel {
    
 
     void currentDateChanged(CalendarDate newdate) {
+    	
         Cursor cur = App.getFrame().getCursor();
         App.getFrame().setCursor(waitCursor);
         if (!changedByHistory) {

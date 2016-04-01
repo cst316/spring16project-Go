@@ -44,6 +44,7 @@ import net.sf.memoranda.ResourcesList;
 import net.sf.memoranda.TaskList;
 import net.sf.memoranda.date.CurrentDate;
 import net.sf.memoranda.ui.htmleditor.HTMLEditor;
+import net.sf.memoranda.ui.timer.GUI;
 import net.sf.memoranda.util.Configuration;
 import net.sf.memoranda.util.Context;
 import net.sf.memoranda.util.CurrentStorage;
@@ -85,7 +86,9 @@ public class AppFrame extends JFrame {
     JMenu jMenuEdit = new JMenu();
     JMenu jMenuFormat = new JMenu();
     JMenu jMenuInsert = new JMenu();
-
+    JMenu jMenuTool = new JMenu();
+    JMenu jMenuGo = new JMenu();
+    
     public WorkPanel workPanel = new WorkPanel();
     HTMLEditor editor = workPanel.dailyItemsPanel.editorPanel.editor;
 
@@ -137,6 +140,11 @@ public class AppFrame extends JFrame {
                         p1Import_actionPerformed(e);
                 }
         };
+        public Action timerAction =new AbstractAction(Local.getString("Open timer")) {
+        	public void actionPerformed(ActionEvent e) {
+        		new GUI();
+        	}
+        };
     
     JMenuItem jMenuFileNewPrj = new JMenuItem();
     JMenuItem jMenuFileNewNote = new JMenuItem(workPanel.dailyItemsPanel.editorPanel.newAction);
@@ -159,7 +167,7 @@ public class AppFrame extends JFrame {
     JMenuItem jMenuEditSelectAll = new JMenuItem(editor.selectAllAction);
     JMenuItem jMenuEditFind = new JMenuItem(editor.findAction);
 
-    JMenu jMenuGo = new JMenu();
+    
     JMenuItem jMenuInsertImage = new JMenuItem(editor.imageAction);
     JMenuItem jMenuInsertTable = new JMenuItem(editor.tableAction);
     JMenuItem jMenuInsertLink = new JMenuItem(editor.linkAction);
@@ -234,6 +242,8 @@ public class AppFrame extends JFrame {
             workPanel.dailyItemsPanel.calendar.todayAction);
 
     JMenuItem jMenuEditPref = new JMenuItem(preferencesAction);
+    
+    JMenuItem jMenuToolTimer = new JMenuItem(timerAction);
 
     JMenu jMenuInsertSpecial = new JMenu();
     
@@ -329,6 +339,7 @@ public class AppFrame extends JFrame {
          }
          });
          */
+        
         jMenuFileNewPrj.setAction(projectsPanel.newProjectAction);
 
         jMenuFileUnpackPrj.setText(Local.getString("Unpack project") + "...");
@@ -388,6 +399,8 @@ public class AppFrame extends JFrame {
         jMenuInsertTime.setText(Local.getString("Current time"));
         jMenuInsertFile.setText(Local.getString("File") + "...");
 
+        jMenuTool.setText(Local.getString("Tool"));
+        
         jMenuFormat.setText(Local.getString("Format"));
         jMenuFormatPStyle.setText(Local.getString("Paragraph style"));
         jMenuFormatP.setText(Local.getString("Paragraph"));
@@ -472,6 +485,7 @@ public class AppFrame extends JFrame {
         menuBar.add(jMenuEdit);
         menuBar.add(jMenuInsert);
         menuBar.add(jMenuFormat);
+        menuBar.add(jMenuTool);
         menuBar.add(jMenuGo);
         menuBar.add(jMenuHelp);
         this.setJMenuBar(menuBar);
@@ -547,6 +561,7 @@ public class AppFrame extends JFrame {
         jMenuFormatAlign.add(jMenuFormatAlignR);
         jMenuFormatTable.add(jMenuFormatTableInsR);
         jMenuFormatTable.add(jMenuFormatTableInsC);
+        jMenuTool.add(jMenuToolTimer);
         jMenuGo.add(jMenuGoHBack);
         jMenuGo.add(jMenuGoFwd);
         jMenuGo.addSeparator();
