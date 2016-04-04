@@ -141,7 +141,7 @@ public class TaskListImpl implements TaskList {
      */
 
     public void removeTask(Task task) {
-        String parentTaskId = task.getParentId();
+        String parentTaskId = task.getParentTaskId();
         if (parentTaskId == null) {
             _root.removeChild(task.getContent());            
         }
@@ -364,6 +364,79 @@ public class TaskListImpl implements TaskList {
     		return false;
     	}
     }
+
+	@Override
+	public Item getItem(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Item createItem(CalendarDate startDate, CalendarDate endDate, String text, int priority, long effort,
+			String description, String parentItemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeItem(Item item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean hasSubItems(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasParentItem(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Collection getTopLevelItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection getAllSubItems(String itemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection getActiveSubItems(String itemId, CalendarDate date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long calculateTotalEffortFromSubItems(Item t) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public CalendarDate getLatestEndDateFromSubItems(Item t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalendarDate getEarliestStartDateFromSubItems(Item t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long[] calculateCompletionFromSubItems(Item t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
     /*
      * deprecated methods below

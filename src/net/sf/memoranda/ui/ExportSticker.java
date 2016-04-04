@@ -14,11 +14,12 @@ import net.sf.memoranda.util.Local;
 import nu.xom.Document;
 import nu.xom.Element;
 import nu.xom.Elements;
+//should be workings
 
 public class ExportSticker {
 
-        private String name; 
-        
+        private String name;
+
         /*public static Document _doc = null;
         static Element _root = null;
 
@@ -34,7 +35,7 @@ public class ExportSticker {
                         _root = _doc.getRootElement();
 
         }*/
-        
+
         public ExportSticker(String x) {
                 this.name = remove1(x);
         }
@@ -43,57 +44,59 @@ public class ExportSticker {
          * Function to eliminate special chars from a string
          */
         public static String remove1(String input) {
-            
+
             String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
-            
+
             String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
             String output = input;
             for (int i=0; i<original.length(); i++) {
-            
+
                 output = output.replace(original.charAt(i), ascii.charAt(i));
             }
             return output;
         }
-        
+
         public boolean export(String src){
                 boolean result = true;
                 String fs = System.getProperty("file.separator");
-                
+
                 String contents = getSticker();
                 try {
                 File file = new File(this.name+"."+src);
-                
-                
+
+
                         FileWriter fwrite=new FileWriter(file,true);
-            
+
                         fwrite.write(contents);
-                        
+
                         fwrite.close();
-                        JOptionPane.showMessageDialog(null,Local.getString("Documento creado con exito en su carpeta Memoranda =D"));
+
+                        JOptionPane.showMessageDialog(null,Local.getString("Document Created in your memoranda folder"));
             
             
+
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null,Local.getString("NO Logramos crear su documento =(..."));
+            JOptionPane.showMessageDialog(null,Local.getString("Aren't able to create your document...."));
         }
-                
-                
-                        
+
+
+
                 return result;
         }
-        
+
         public String getSticker(){
                 Map stickers = EventsManager.getStickers();
         String result = "";
-        String nl = System.getProperty("line.separator"); 
+        String nl = System.getProperty("line.separator");
                 for (Iterator i = stickers.keySet().iterator(); i.hasNext();) {
             String id = (String)i.next();
             result += (String)(((Element)stickers.get(id)).getValue())+nl;
             }
-            
+
                 return result;
         }
-        
+
         /*public static String getStickers() {
                 String result ="";
                 Elements els = _root.getChildElements("sticker");
@@ -103,7 +106,7 @@ public class ExportSticker {
                 }
                 return m;
         }*/
-        
-        
-        
+
+
+
 }

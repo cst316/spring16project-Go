@@ -44,6 +44,7 @@ import net.sf.memoranda.ResourcesList;
 import net.sf.memoranda.TaskList;
 import net.sf.memoranda.date.CurrentDate;
 import net.sf.memoranda.ui.htmleditor.HTMLEditor;
+import net.sf.memoranda.ui.timer.GUI;
 import net.sf.memoranda.util.Configuration;
 import net.sf.memoranda.util.Context;
 import net.sf.memoranda.util.CurrentStorage;
@@ -85,7 +86,9 @@ public class AppFrame extends JFrame {
     JMenu jMenuEdit = new JMenu();
     JMenu jMenuFormat = new JMenu();
     JMenu jMenuInsert = new JMenu();
-
+    JMenu jMenuTool = new JMenu();
+    JMenu jMenuGo = new JMenu();
+    
     public WorkPanel workPanel = new WorkPanel();
     HTMLEditor editor = workPanel.dailyItemsPanel.editorPanel.editor;
 
@@ -137,9 +140,14 @@ public class AppFrame extends JFrame {
                         p1Import_actionPerformed(e);
                 }
         };
+        public Action timerAction =new AbstractAction(Local.getString("Open timer")) {
+        	public void actionPerformed(ActionEvent e) {
+        		new GUI();
+        	}
+        };
     
     JMenuItem jMenuFileNewPrj = new JMenuItem();
-        JMenuItem jMenuFileNewNote = new JMenuItem(workPanel.dailyItemsPanel.editorPanel.newAction);
+    JMenuItem jMenuFileNewNote = new JMenuItem(workPanel.dailyItemsPanel.editorPanel.newAction);
     JMenuItem jMenuFilePackPrj = new JMenuItem(prjPackAction);
     JMenuItem jMenuFileUnpackPrj = new JMenuItem(prjUnpackAction);
     JMenuItem jMenuFileExportPrj = new JMenuItem(exportNotesAction);
@@ -159,7 +167,7 @@ public class AppFrame extends JFrame {
     JMenuItem jMenuEditSelectAll = new JMenuItem(editor.selectAllAction);
     JMenuItem jMenuEditFind = new JMenuItem(editor.findAction);
 
-    JMenu jMenuGo = new JMenu();
+    
     JMenuItem jMenuInsertImage = new JMenuItem(editor.imageAction);
     JMenuItem jMenuInsertTable = new JMenuItem(editor.tableAction);
     JMenuItem jMenuInsertLink = new JMenuItem(editor.linkAction);
@@ -234,6 +242,8 @@ public class AppFrame extends JFrame {
             workPanel.dailyItemsPanel.calendar.todayAction);
 
     JMenuItem jMenuEditPref = new JMenuItem(preferencesAction);
+    
+    JMenuItem jMenuToolTimer = new JMenuItem(timerAction);
 
     JMenu jMenuInsertSpecial = new JMenu();
     
@@ -329,6 +339,7 @@ public class AppFrame extends JFrame {
          }
          });
          */
+        
         jMenuFileNewPrj.setAction(projectsPanel.newProjectAction);
 
         jMenuFileUnpackPrj.setText(Local.getString("Unpack project") + "...");
@@ -388,6 +399,8 @@ public class AppFrame extends JFrame {
         jMenuInsertTime.setText(Local.getString("Current time"));
         jMenuInsertFile.setText(Local.getString("File") + "...");
 
+        jMenuTool.setText(Local.getString("Tool"));
+        
         jMenuFormat.setText(Local.getString("Format"));
         jMenuFormatPStyle.setText(Local.getString("Paragraph style"));
         jMenuFormatP.setText(Local.getString("Paragraph"));
@@ -472,6 +485,7 @@ public class AppFrame extends JFrame {
         menuBar.add(jMenuEdit);
         menuBar.add(jMenuInsert);
         menuBar.add(jMenuFormat);
+        menuBar.add(jMenuTool);
         menuBar.add(jMenuGo);
         menuBar.add(jMenuHelp);
         this.setJMenuBar(menuBar);
@@ -547,6 +561,7 @@ public class AppFrame extends JFrame {
         jMenuFormatAlign.add(jMenuFormatAlignR);
         jMenuFormatTable.add(jMenuFormatTableInsR);
         jMenuFormatTable.add(jMenuFormatTableInsC);
+        jMenuTool.add(jMenuToolTimer);
         jMenuGo.add(jMenuGoHBack);
         jMenuGo.add(jMenuGoFwd);
         jMenuGo.addSeparator();
@@ -557,7 +572,6 @@ public class AppFrame extends JFrame {
         splitPane.setBorder(null);
         workPanel.setBorder(null);
 
-        setEnabledEditorMenus(false);
 
         projectsPanel.AddExpandListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -578,55 +592,16 @@ public class AppFrame extends JFrame {
             }
         };
 
-        this.workPanel.dailyItemsPanel.taskB
+        this.workPanel.dailyItemsPanel.processesB
                 .addActionListener(setMenusDisabled);
         this.workPanel.dailyItemsPanel.alarmB.addActionListener(
                 setMenusDisabled);
-//Add some comment
-/*          ######Old Code#######
-        this.workPanel.tasksB.addActionListener(setMenusDisabled);
+        
+        
+        this.workPanel.processesB.addActionListener(setMenusDisabled);
         this.workPanel.eventsB.addActionListener(setMenusDisabled);
         this.workPanel.filesB.addActionListener(setMenusDisabled);
-        this.workPanel.agendaB.addActionListener(setMenusDisabled);
-*/
-        
-
-/*    ######Enable the Edit, Insert and Format in Agenda,Events,Task and Resources.###### */
-        this.workPanel.filesB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                });
-      
-        this.workPanel.filesB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                }); 
-        
-        this.workPanel.tasksB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                });
-  
-        this.workPanel.eventsB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                });
-       
-        this.workPanel.agendaB.addActionListener(
-                new java.awt.event.ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        setEnabledEditorMenus(true);
-                    }
-                });
-///////////////////////////////////////////////////////////////////////////////////////////////////        
+        this.workPanel.agendaB.addActionListener(setMenusDisabled);        
         this.workPanel.notesB.addActionListener(
                 new java.awt.event.ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -655,8 +630,7 @@ public class AppFrame extends JFrame {
         String pan = (String) Context.get("CURRENT_PANEL");
         if (pan != null) {
             workPanel.selectPanel(pan);
-            setEnabledEditorMenus(pan.equalsIgnoreCase("NOTES"));
-        }
+            setEnabledEditorMenus(pan.equalsIgnoreCase("NOTES"));        }
 
         CurrentProject.addProjectListener(new ProjectListener() {
 
@@ -726,8 +700,7 @@ public class AppFrame extends JFrame {
             if (Configuration.get("ON_CLOSE").equals("exit"))
                 doExit();
             else{
-            	exitNotify();
-            	App.closeWindow();
+            	doMinimize();
             }
                 
         }

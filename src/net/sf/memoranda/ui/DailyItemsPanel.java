@@ -62,6 +62,7 @@ public class DailyItemsPanel extends JPanel {
     public EditorPanel editorPanel = new EditorPanel(this);
     JLabel currentDateLabel = new JLabel();
     BorderLayout borderLayout4 = new BorderLayout();
+    ProcessPanel processesPanel = new ProcessPanel(this);
     TaskPanel tasksPanel = new TaskPanel(this);
     EventsPanel eventsPanel = new EventsPanel(this);
     AgendaPanel agendaPanel = new AgendaPanel(this);
@@ -88,7 +89,8 @@ public class DailyItemsPanel extends JPanel {
     JPanel indicatorsPanel = new JPanel();
     JButton alarmB = new JButton();
     FlowLayout flowLayout1 = new FlowLayout();
-    JButton taskB = new JButton();
+    JButton processesB = new JButton();
+    JButton tasksB = new JButton();
     JPanel mainTabsPanel = new JPanel();
     NotesControlPanel notesControlPane = new NotesControlPanel();
     CardLayout cardLayout2 = new CardLayout();
@@ -176,19 +178,32 @@ public class DailyItemsPanel extends JPanel {
         alarmB.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/alarm.png")));
         flowLayout1.setAlignment(FlowLayout.RIGHT);
         flowLayout1.setVgap(0);
-        taskB.setMargin(new Insets(0, 0, 0, 0));
-        taskB.addActionListener(new java.awt.event.ActionListener() {
+        processesB.setMargin(new Insets(0, 0, 0, 0));
+        processesB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                taskB_actionPerformed(e);
+                processesB_actionPerformed(e);
             }
         });
-        taskB.setPreferredSize(new Dimension(24, 24));
-        taskB.setToolTipText(Local.getString("Active to-do tasks"));
-        taskB.setBorderPainted(false);
-        taskB.setMaximumSize(new Dimension(24, 24));
-        taskB.setOpaque(false);
-        taskB.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/task.png")));
+        processesB.setPreferredSize(new Dimension(24, 24));
+        processesB.setToolTipText(Local.getString("Active Processes"));
+        processesB.setBorderPainted(false);
+        processesB.setMaximumSize(new Dimension(24, 24));
+        processesB.setOpaque(false);
+        processesB.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/task.png")));
 
+        tasksB.setMargin(new Insets(0, 0, 0, 0));
+        tasksB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tasksB_actionPerformed(e);
+            }
+        });
+        tasksB.setPreferredSize(new Dimension(24, 24));
+        tasksB.setToolTipText(Local.getString("Active to-do tasks"));
+        tasksB.setBorderPainted(false);
+        tasksB.setMaximumSize(new Dimension(24, 24));
+        tasksB.setOpaque(false);
+        tasksB.setIcon(new ImageIcon(net.sf.memoranda.ui.AppFrame.class.getResource("resources/icons/task.png")));
+        
         notesControlPane.setFont(new java.awt.Font("Dialog", 1, 10));
         mainTabsPanel.setLayout(cardLayout2);
         this.add(splitPane, BorderLayout.CENTER);
@@ -204,6 +219,7 @@ public class DailyItemsPanel extends JPanel {
         
         editorsPanel.add(agendaPanel, "AGENDA");
         editorsPanel.add(eventsPanel, "EVENTS");
+        editorsPanel.add(processesPanel, "PROCESSES");
         editorsPanel.add(tasksPanel, "TASKS");
         editorsPanel.add(editorPanel, "NOTES");
         
@@ -308,6 +324,7 @@ public class DailyItemsPanel extends JPanel {
    
 
     void currentDateChanged(CalendarDate newdate) {
+    	
         Cursor cur = App.getFrame().getCursor();
         App.getFrame().setCursor(waitCursor);
         if (!changedByHistory) {
@@ -425,7 +442,7 @@ public class DailyItemsPanel extends JPanel {
         indicatorsPanel.removeAll();
         if (date.equals(CalendarDate.today())) {
             if (tl.getActiveSubTasks(null,date).size() > 0)
-                indicatorsPanel.add(taskB, null);
+                indicatorsPanel.add(processesB, null);
             if (EventsScheduler.isEventScheduled()) {
                 /*String evlist = "";
                 for (Iterator it = EventsScheduler.getScheduledEvents().iterator(); it.hasNext();) {
@@ -445,6 +462,7 @@ public class DailyItemsPanel extends JPanel {
     }
 
     public void selectPanel(String pan) {
+    	
         if (calendar.jnCalendar.renderer.getTask() != null) {
             calendar.jnCalendar.renderer.setTask(null);
          //   calendar.jnCalendar.updateUI();
@@ -460,6 +478,19 @@ public class DailyItemsPanel extends JPanel {
             calendar.jnCalendar.renderer.setTask(t);
        //     calendar.jnCalendar.updateUI();
         }
+        
+        if (pan.equals("PROCESSES") && (processesPanel.taskTable.getSelectedRow() > -1)) {
+            Task t =
+                CurrentProject.getTaskList().getTask(
+                	processesPanel
+                        .taskTable
+                        .getModel()
+                        .getValueAt(processesPanel.taskTable.getSelectedRow(), TaskTable.TASK_ID)
+                        .toString());
+            calendar.jnCalendar.renderer.setTask(t);
+       //     calendar.jnCalendar.updateUI();
+        }
+        
         boolean isAg = pan.equals("AGENDA");
         agendaPanel.setActive(isAg);
         if (isAg)
@@ -473,11 +504,14 @@ public class DailyItemsPanel extends JPanel {
 	public String getCurrentPanel() {
 		return CurrentPanel;
 	}
-    void taskB_actionPerformed(ActionEvent e) {
-        parentPanel.tasksB_actionPerformed(null);
+    void processesB_actionPerformed(ActionEvent e) {
+         parentPanel.processesB_actionPerformed(null);
+    }
+    void tasksB_actionPerformed(ActionEvent e){
+    	 parentPanel.tasksB_actionPerformed(null);
     }
 
     void alarmB_actionPerformed(ActionEvent e) {
-        parentPanel.eventsB_actionPerformed(null);
+         parentPanel.eventsB_actionPerformed(null);
     }
 }
