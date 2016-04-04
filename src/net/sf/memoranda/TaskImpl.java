@@ -388,5 +388,53 @@ public class TaskImpl implements Task, Comparable {
 		return false;
 	}
 
+	@Override
+	public void addDependsFrom(Item item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeDependsFrom(Item item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Collection getSubItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Item getSubItem(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasSubItems(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Item getParentItem() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getParentItemId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getParentTaskId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

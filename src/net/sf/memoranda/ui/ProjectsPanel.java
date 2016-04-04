@@ -76,6 +76,7 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 	JCheckBoxMenuItem ppShowActiveOnlyChB = new JCheckBoxMenuItem();
 	JButton ppOpenB = new JButton();
 	ProjectsTablePanel prjTablePanel = new ProjectsTablePanel();
+	
 
 	public Action newProjectAction =
 		new AbstractAction(

@@ -35,6 +35,7 @@ public class WorkPanel extends JPanel {
 	public DailyItemsPanel dailyItemsPanel = new DailyItemsPanel(this);
 	public ResourcesPanel filesPanel = new ResourcesPanel();
 	public JButton agendaB = new JButton();
+	public JButton processesB = new JButton();
 	public JButton tasksB = new JButton();
 	public JButton eventsB = new JButton();
 	public JButton filesB = new JButton();
@@ -120,6 +121,31 @@ public class WorkPanel extends JPanel {
 		eventsB.setMargin(new Insets(0, 0, 0, 0));
 		//eventsB.setSelected(true);
 
+		processesB.setSelected(true);
+		processesB.setFont(new java.awt.Font("Dialog", 1, 10));
+		processesB.setMargin(new Insets(0, 0, 0, 0));
+		processesB.setIcon(
+			new ImageIcon(
+				net.sf.memoranda.ui.AppFrame.class.getResource(
+					"resources/icons/tasks.png")));
+		processesB.setVerticalTextPosition(SwingConstants.BOTTOM);
+		processesB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				processesB_actionPerformed(e);
+			}
+		});
+		processesB.setVerticalAlignment(SwingConstants.TOP);
+		processesB.setText(Local.getString("Processes"));
+		processesB.setHorizontalTextPosition(SwingConstants.CENTER);
+		processesB.setFocusPainted(false);
+		processesB.setBorderPainted(false);
+		processesB.setContentAreaFilled(false);
+		processesB.setPreferredSize(new Dimension(50, 50));
+		processesB.setMinimumSize(new Dimension(30, 30));
+		processesB.setOpaque(false);
+		processesB.setMaximumSize(new Dimension(60, 80));
+		processesB.setBackground(Color.white);
+		
 		tasksB.setSelected(true);
 		tasksB.setFont(new java.awt.Font("Dialog", 1, 10));
 		tasksB.setMargin(new Insets(0, 0, 0, 0));
@@ -202,6 +228,7 @@ public class WorkPanel extends JPanel {
 		panel.add(filesPanel, "FILES");
 		toolBar.add(agendaB, null);
 		toolBar.add(eventsB, null);
+		toolBar.add(processesB, null);
 		toolBar.add(tasksB, null);
 		toolBar.add(notesB, null);
 		toolBar.add(filesB, null);
@@ -221,6 +248,8 @@ public class WorkPanel extends JPanel {
 		if (pan != null) {
 			if (pan.equals("NOTES"))
 				notesB_actionPerformed(null);
+			else if (pan.equals("PROCESSES"))
+				processesB_actionPerformed(null);
 			else if (pan.equals("TASKS"))
 				tasksB_actionPerformed(null);
 			else if (pan.equals("EVENTS"))
@@ -244,6 +273,13 @@ public class WorkPanel extends JPanel {
 		Context.put("CURRENT_PANEL", "NOTES");
 	}
 
+	public void processesB_actionPerformed(ActionEvent e) {
+		cardLayout1.show(panel, "DAILYITEMS");
+		dailyItemsPanel.selectPanel("PROCESSES");
+		setCurrentButton(processesB);
+		Context.put("CURRENT_PANEL", "PROCESSES");
+	}
+	
 	public void tasksB_actionPerformed(ActionEvent e) {
 		cardLayout1.show(panel, "DAILYITEMS");
 		dailyItemsPanel.selectPanel("TASKS");
