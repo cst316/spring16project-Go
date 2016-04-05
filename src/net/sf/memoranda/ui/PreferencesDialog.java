@@ -24,15 +24,15 @@ public class PreferencesDialog extends JDialog {
 	GridBagConstraints gbc;
 
 	//Added JLabel and more RadioButton(s)
-	 JLabel userType = new JLabel();
+	JLabel userType = new JLabel();
 
-	 ButtonGroup userTypes = new ButtonGroup();
+	ButtonGroup userTypes = new ButtonGroup();
 
-	 JRadioButton heavyUserRB = new JRadioButton();
+	JRadioButton heavyUserRB = new JRadioButton();
 
-	 JRadioButton casualUserRB = new JRadioButton();
+	JRadioButton casualUserRB = new JRadioButton();
 
-	 JRadioButton customUserRB = new JRadioButton();
+	JRadioButton customUserRB = new JRadioButton();
 
 	JLabel jLabel1 = new JLabel();
 
@@ -60,10 +60,10 @@ public class PreferencesDialog extends JDialog {
 	JRadioButton lfJavaRB = new JRadioButton();
 	JRadioButton lfCustomRB = new JRadioButton();
 
-    ButtonGroup lfGroup = new ButtonGroup();
+	ButtonGroup lfGroup = new ButtonGroup();
 
 
-    JLabel classNameLabel = new JLabel();
+	JLabel classNameLabel = new JLabel();
 
 	JTextField lfClassName = new JTextField();
 
@@ -882,11 +882,21 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	void casualUserRB_actionPerformed(ActionEvent e) {
+		casualUserRB_actionPerformed();
+	}
+
+	public void casualUserRB_actionPerformed()
+	{
 		minTaskbarRB.setSelected(true);
 		closeExitRB.setSelected(true);
 		enSystrayChB.setSelected(false);
 		startMinimizedChB.setSelected(false);
 		enSplashChB.setSelected(true);
+	}
+
+	public boolean casualUserRB_profiled()
+	{
+		return (minTaskbarRB.isSelected() && !minHideRB.isSelected() && closeExitRB.isSelected() && !closeHideRB.isSelected() && !enSystrayChB.isSelected() && !startMinimizedChB.isSelected() && enSplashChB.isSelected());
 	}
 
 	void okB_actionPerformed(ActionEvent e) {

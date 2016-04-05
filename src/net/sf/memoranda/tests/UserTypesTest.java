@@ -40,17 +40,12 @@ public class UserTypesTest {
   {
     pDialog.heavyUserRB_actionPerformed();
     assertTrue(pDialog.heavyUserRB_profiled());
-    /*
-    assertTrue(minTaskbarRB.isSelected());
-    assertFalse(minHideRB.isSelected());
-    assertTrue(closeHideRB.isSelected());
-    assertFalse(closeExitRB.isSelected());
-    assertTrue(enSystrayChB.isSelected());
-    assertTrue(startMinimizedChB.isSelected());
-    assertFalse(enSplashChB.isSelected());
-    */
   }
 
-
-
+  @Test
+  public void casualUserTest()
+  {
+    pDialog.casualUserRB_actionPerformed();
+    assertTrue(pDialog.casualUserRB_profiled());
+  }
 }
