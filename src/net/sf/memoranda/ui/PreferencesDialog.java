@@ -25,15 +25,15 @@ public class PreferencesDialog extends JDialog {
 
 	//Added JLabel and more RadioButton(s)
 	 JLabel userType = new JLabel();
-	 
+
 	 ButtonGroup userTypes = new ButtonGroup();
-	 
+
 	 JRadioButton heavyUserRB = new JRadioButton();
-	 
+
 	 JRadioButton casualUserRB = new JRadioButton();
-	 
+
 	 JRadioButton customUserRB = new JRadioButton();
-	 
+
 	JLabel jLabel1 = new JLabel();
 
 	ButtonGroup minGroup = new ButtonGroup();
@@ -54,21 +54,21 @@ public class PreferencesDialog extends JDialog {
 
 	JLabel jLabel3 = new JLabel();
 
-	
+
 
 	JRadioButton lfSystemRB = new JRadioButton();
 	JRadioButton lfJavaRB = new JRadioButton();
 	JRadioButton lfCustomRB = new JRadioButton();
 
     ButtonGroup lfGroup = new ButtonGroup();
-	
-    
+
+
     JLabel classNameLabel = new JLabel();
 
 	JTextField lfClassName = new JTextField();
 
 	JLabel jLabel4 = new JLabel();
-	
+
 	//Added new JLabel startup
 	JLabel startup = new JLabel();
 
@@ -139,7 +139,7 @@ public class PreferencesDialog extends JDialog {
 	JRadioButton soundCustomRB = new JRadioButton();
 
 	BorderLayout borderLayout2 = new BorderLayout();
-	
+
 	JPanel editorConfigPanel = new JPanel(new BorderLayout());
 	JPanel econfPanel = new JPanel(new GridLayout(5, 2));
 	Vector fontnames = getFontNames();
@@ -180,7 +180,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 10, 0, 15);
 		gbc.anchor = GridBagConstraints.EAST;
 		GeneralPanel.add(userType, gbc);
-		
+
 		userTypes.add(heavyUserRB);
 		heavyUserRB.setText(Local.getString("Heavy User"));
 		heavyUserRB.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +194,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(heavyUserRB, gbc);
-				
+
 		userTypes.add(casualUserRB);
 		casualUserRB.setText(Local.getString("Casual User"));
 		casualUserRB.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +208,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(casualUserRB, gbc);
-		
+
 		userTypes.add(customUserRB);
 		customUserRB.setText(Local.getString("Custom"));
 		customUserRB.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +222,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(customUserRB, gbc);
-		
+
 		enableSoundCB.setText(Local.getString("Enable sound notifications"));
 		enableSoundCB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -272,7 +272,7 @@ public class PreferencesDialog extends JDialog {
 		jPanel3.add(soundFile, BorderLayout.CENTER);
 		jPanel3.add(soundFileBrowseB, BorderLayout.EAST);
 		jPanel3.add(jLabel6, BorderLayout.WEST);
-		
+
 		jLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel3.setText(Local.getString("Theme:"));
 		gbc = new GridBagConstraints();
@@ -310,7 +310,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(lfJavaRB, gbc);
-		
+
 		lfGroup.add(lfCustomRB);
 		lfCustomRB.setText(Local.getString("Custom"));
 		lfCustomRB.addActionListener(new java.awt.event.ActionListener() {
@@ -324,7 +324,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(lfCustomRB, gbc);
-		
+
 		classNameLabel.setText(Local.getString("Theme class name:"));
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -332,7 +332,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 20, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(classNameLabel, gbc);
-		
+
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 7;
@@ -340,7 +340,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		GeneralPanel.add(lfClassName, gbc);
-		
+
 		jLabel4.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel4.setText(Local.getString("Startup:"));
 		gbc = new GridBagConstraints();
@@ -349,7 +349,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 10, 0, 15);
 		gbc.anchor = GridBagConstraints.EAST;
 		GeneralPanel.add(jLabel4, gbc);
-		
+
 		enL10nChB.setText(Local.getString("Enable localization"));
 		enL10nChB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -362,7 +362,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(enL10nChB, gbc);
-		
+
 		firstdow.setText(Local.getString("First day of week - Monday"));
 		firstdow.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -374,7 +374,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(firstdow, gbc);
-		
+
 		lblExit.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblExit.setText(Local.getString("Exit") + ":");
 		gbc = new GridBagConstraints();
@@ -383,7 +383,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 10, 10, 15);
 		gbc.anchor = GridBagConstraints.EAST;
 		GeneralPanel.add(lblExit, gbc);
-		
+
 		askConfirmChB.setSelected(true);
 		askConfirmChB.setText(Local.getString("Ask confirmation"));
 		askConfirmChB.addActionListener(new java.awt.event.ActionListener() {
@@ -405,7 +405,7 @@ public class PreferencesDialog extends JDialog {
 		rsbpBorder = new TitledBorder(BorderFactory.createEmptyBorder(5, 5, 5,
 				5), Local.getString("Web browser executable"));
 		rsBottomPanel.setBorder(rsbpBorder);
-		
+
 		jLabel5.setText(Local.getString("Path") + ":");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -413,7 +413,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(0, 5, 0, 5);
 		gbc.anchor = GridBagConstraints.WEST;
 		rsBottomPanel.add(jLabel5, gbc);
-		
+
 		browserPath.setPreferredSize(new Dimension(250, 25));
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -422,7 +422,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		rsBottomPanel.add(browserPath, gbc);
-		
+
 		browseB.setText(Local.getString("Browse"));
 		browseB.setPreferredSize(new Dimension(110, 25));
 		browseB.addActionListener(new java.awt.event.ActionListener() {
@@ -438,7 +438,7 @@ public class PreferencesDialog extends JDialog {
 		rsBottomPanel.add(browseB, gbc);
 
 		resourcePanel.add(rsBottomPanel, BorderLayout.SOUTH);
-		
+
 		// Build editorConfigPanel
 		normalFontLabel.setText(Local.getString("Normal text font"));
 		normalFontLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -449,7 +449,7 @@ public class PreferencesDialog extends JDialog {
 		baseFontSizeLabel.setText(Local.getString("Base font size"));
 		baseFontSizeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		antialiasChB.setText(Local.getString("Antialias text"));
-		JPanel bfsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
+		JPanel bfsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		bfsPanel.add(baseFontSize);
 		econfPanel.add(normalFontLabel);
 		econfPanel.add(normalFontCB);
@@ -464,7 +464,7 @@ public class PreferencesDialog extends JDialog {
 		((GridLayout)econfPanel.getLayout()).setHgap(10);
 		((GridLayout)econfPanel.getLayout()).setVgap(5);
 		editorConfigPanel.add(econfPanel, BorderLayout.NORTH);
-		
+
 		// Build AdvancedPanel
 		JPanel AdvancedPanel = new JPanel(new GridBagLayout());
 
@@ -476,7 +476,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 10, 0, 15);
 		gbc.anchor = GridBagConstraints.EAST;
 		AdvancedPanel.add(startup, gbc);
-		
+
 		startMinimizedChB.setText(Local.getString("Start minimized"));
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
@@ -484,7 +484,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		AdvancedPanel.add(startMinimizedChB, gbc);
-		
+
 		enSystrayChB.setText(Local.getString("Enable system tray icon"));
 		enSystrayChB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -497,7 +497,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		AdvancedPanel.add(enSystrayChB, gbc);
-		
+
 		enSplashChB.setText(Local.getString("Show splash screen"));
 		enSplashChB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -510,7 +510,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		AdvancedPanel.add(enSplashChB, gbc);
-		
+
 		jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel1.setText(Local.getString("Window minimize action:"));
 		gbc = new GridBagConstraints();
@@ -519,7 +519,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 10, 0, 15);
 		gbc.anchor = GridBagConstraints.EAST;
 		AdvancedPanel.add(jLabel1, gbc);
-		
+
 		minGroup.add(minTaskbarRB);
 		minTaskbarRB.setText(Local.getString("Minimize to taskbar"));
 		minTaskbarRB.addActionListener(new java.awt.event.ActionListener() {
@@ -533,7 +533,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		AdvancedPanel.add(minTaskbarRB, gbc);
-		
+
 		minGroup.add(minHideRB);
 		minHideRB.setText(Local.getString("Hide"));
 		minHideRB.addActionListener(new java.awt.event.ActionListener() {
@@ -547,7 +547,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
 		AdvancedPanel.add(minHideRB, gbc);
-		
+
 		jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel2.setText(Local.getString("Window close action:"));
 		gbc = new GridBagConstraints();
@@ -556,7 +556,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.insets = new Insets(2, 10, 0, 15);
 		gbc.anchor = GridBagConstraints.EAST;
 		AdvancedPanel.add(jLabel2, gbc);
-		
+
 		closeGroup.add(closeExitRB);
 		closeExitRB.setSelected(true);
 		closeExitRB.setText(Local.getString("Close and exit"));
@@ -584,8 +584,8 @@ public class PreferencesDialog extends JDialog {
 		gbc.gridy = 6;
 		gbc.insets = new Insets(2, 0, 0, 10);
 		gbc.anchor = GridBagConstraints.WEST;
-		AdvancedPanel.add(closeHideRB, gbc);		
-		
+		AdvancedPanel.add(closeHideRB, gbc);
+
 		// Build TabbedPanel
 		tabbedPanel.add(GeneralPanel, Local.getString("General"));
 		tabbedPanel.add(resourcePanel, Local.getString("Resource types"));
@@ -615,8 +615,8 @@ public class PreferencesDialog extends JDialog {
 				cancelB_actionPerformed(e);
 			}
 		});
-		bottomPanel.add(cancelB);		
-		
+		bottomPanel.add(cancelB);
+
 		// Build Preferences-Dialog
 		getContentPane().add(topPanel, BorderLayout.NORTH);
 		getContentPane().add(bottomPanel, BorderLayout.SOUTH);
@@ -646,7 +646,7 @@ public class PreferencesDialog extends JDialog {
 			casualUserRB.setSelected(true);
 		else
 			customUserRB.setSelected(true);
-		
+
 		enableCustomLF(false);
 		String lf = Configuration.get("LOOK_AND_FEEL").toString();
 		if (lf.equalsIgnoreCase("system"))
@@ -702,7 +702,7 @@ public class PreferencesDialog extends JDialog {
 			this.enableCustomSound(true);
 		}
 		this.enableSound(enableSnd);
-		
+
 		antialiasChB.setSelected(Configuration.get("ANTIALIAS_TEXT")
 				.toString().equalsIgnoreCase("yes"));
 		if (Configuration.get("NORMAL_FONT").toString().length() >0)
@@ -730,7 +730,7 @@ public class PreferencesDialog extends JDialog {
 			Configuration.put("USER_TYPE", "casual");
 		else
 			Configuration.put("USER_TYPE", "custom");
-		
+
 		if (this.firstdow.isSelected())
 			Configuration.put("FIRST_DAY_OF_WEEK", "mon");
 		else
@@ -821,7 +821,7 @@ public class PreferencesDialog extends JDialog {
 			Configuration.put("ANTIALIAS_TEXT", "yes");
 		else
 			Configuration.put("ANTIALIAS_TEXT", "no");
-		
+
 		Configuration.put("NORMAL_FONT", normalFontCB.getSelectedItem());
 		Configuration.put("HEADER_FONT", headerFontCB.getSelectedItem());
 		Configuration.put("MONO_FONT", monoFontCB.getSelectedItem());
@@ -829,11 +829,11 @@ public class PreferencesDialog extends JDialog {
 		App.getFrame().workPanel.dailyItemsPanel.editorPanel.editor.editor.setAntiAlias(antialiasChB.isSelected());
 		App.getFrame().workPanel.dailyItemsPanel.editorPanel.initCSS();
 		App.getFrame().workPanel.dailyItemsPanel.editorPanel.editor.repaint();
-		
+
 		Configuration.saveConfig();
-		
+
 	}
-	
+
 	void customUser() {
 		this.heavyUserRB.setSelected(true);
 		this.casualUserRB.setSelected(true);
@@ -864,13 +864,23 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	void heavyUserRB_actionPerformed(ActionEvent e) {
+		heavyUserRB_actionPerformed();
+	}
+
+	public void heavyUserRB_actionPerformed()
+	{
 		minTaskbarRB.setSelected(true);
 		closeHideRB.setSelected(true);
 		enSystrayChB.setSelected(true);
 		startMinimizedChB.setSelected(true);
 		enSplashChB.setSelected(false);
 	}
-	
+
+	public boolean heavyUserRB_profiled()
+	{
+		return (minTaskbarRB.isSelected() && closeHideRB.isSelected() && enSystrayChB.isSelected() && startMinimizedChB.isSelected()&& !minHideRB.isSelected() && !closeExitRB.isSelected() && !enSplashChB.isSelected());
+	}
+
 	void casualUserRB_actionPerformed(ActionEvent e) {
 		minTaskbarRB.setSelected(true);
 		closeExitRB.setSelected(true);
@@ -878,7 +888,7 @@ public class PreferencesDialog extends JDialog {
 		startMinimizedChB.setSelected(false);
 		enSplashChB.setSelected(true);
 	}
-	
+
 	void okB_actionPerformed(ActionEvent e) {
 		apply();
 		this.dispose();
@@ -1029,9 +1039,9 @@ public class PreferencesDialog extends JDialog {
 	void soundCustomRB_actionPerformed(ActionEvent e) {
 		this.enableCustomSound(true);
 	}
-	
+
 	Vector getFontNames() {
-		GraphicsEnvironment gEnv = 
+		GraphicsEnvironment gEnv =
         	GraphicsEnvironment.getLocalGraphicsEnvironment();
         String envfonts[] = gEnv.getAvailableFontFamilyNames();
         Vector fonts = new Vector();
