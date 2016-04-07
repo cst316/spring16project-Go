@@ -23,7 +23,7 @@ public class AlarmModel
     int minutes = calendar.get(12);
     int seconds = calendar.get(13);
     String time;
-    //String time;
+    
     if (hours < 10) {
       time = "0" + hours;
     } else {
@@ -45,7 +45,7 @@ public class AlarmModel
   public String getAlarmTime()
   {
     String time;
-    //String time;
+    
     if (this.hours < 10) {
       time = "0" + this.hours;
     } else {
