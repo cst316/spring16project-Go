@@ -13,6 +13,17 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.event.*;
 
+/*
+ * Class reviewed by David Diaz on 4/7/16
+ * Overview:
+ * The Class as a whole is good no major
+ * issues found. I did leave some notes of
+ * things that should be fixed but these changes
+ * are for readibility.
+ * 4 notes total 
+ * 
+ */
+
 /*$Id: PreferencesDialog.java,v 1.16 2006/06/28 22:58:31 alexeya Exp $*/
 public class PreferencesDialog extends JDialog {
 	JPanel topPanel = new JPanel(new BorderLayout());
@@ -24,7 +35,8 @@ public class PreferencesDialog extends JDialog {
 	GridBagConstraints gbc;
 
 	//Added JLabel and more RadioButton(s)
-	JLabel userType = new JLabel();
+	JLabel userType = new JLabel();							//Note 1: 	change userType variable to userTypeLabel
+	 														//			or userTypeLbl so the reader knows its a label
 
 	ButtonGroup userTypes = new ButtonGroup();
 
@@ -70,7 +82,8 @@ public class PreferencesDialog extends JDialog {
 	JLabel jLabel4 = new JLabel();
 
 	//Added new JLabel startup
-	JLabel startup = new JLabel();
+	JLabel startup = new JLabel();				//Note 2: 	change startup variable to startupLabel
+												//			or startupLbl so the reader knows its a label
 
 	JCheckBox enSystrayChB = new JCheckBox();
 
@@ -466,7 +479,8 @@ public class PreferencesDialog extends JDialog {
 		editorConfigPanel.add(econfPanel, BorderLayout.NORTH);
 
 		// Build AdvancedPanel
-		JPanel AdvancedPanel = new JPanel(new GridBagLayout());
+		JPanel AdvancedPanel = new JPanel(new GridBagLayout());	//Note 3: Have AdvancedPanel declared at the top
+																//		of the class like GeneralPanel
 
 		startup.setHorizontalAlignment(SwingConstants.RIGHT);
 		startup.setText(Local.getString("Startup:"));
@@ -863,13 +877,14 @@ public class PreferencesDialog extends JDialog {
 
 	}
 
-	void heavyUserRB_actionPerformed(ActionEvent e) {
-		heavyUserRB_actionPerformed();
-	}
+	void heavyUserRB_actionPerformed(ActionEvent e) {		//Note4: Why do all these action listeners just call
+		heavyUserRB_actionPerformed();						//       another method with the same name? There are
+	}														//       no conditionals so I don't see why there is a
+															//       need for another method.
 
 	public void heavyUserRB_actionPerformed()
 	{
-		minTaskbarRB.setSelected(true);
+		minTaskbarRB.setSelected(true);		
 		closeHideRB.setSelected(true);
 		enSystrayChB.setSelected(true);
 		startMinimizedChB.setSelected(true);
