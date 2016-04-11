@@ -20,8 +20,8 @@ import java.awt.event.*;
  * issues found. I did leave some notes of
  * things that should be fixed but these changes
  * are for readibility.
- * 4 notes total 
- * 
+ * 4 notes total
+ *
  */
 
 /*$Id: PreferencesDialog.java,v 1.16 2006/06/28 22:58:31 alexeya Exp $*/
@@ -35,10 +35,15 @@ public class PreferencesDialog extends JDialog {
 	GridBagConstraints gbc;
 
 	//Added JLabel and more RadioButton(s)
-	JLabel userType = new JLabel();							//Note 1: 	change userType variable to userTypeLabel
-	 														//			or userTypeLbl so the reader knows its a label
+	JLabel userTypeLabel = new JLabel();
+	//Note 1: change userType variable to userTypeLabel or
+	//        userTypeLbl so the reader knows its a label
 
-	ButtonGroup userTypes = new ButtonGroup();
+	/* Original writer reply:
+	 *     Advise is taken. Label is updated.
+	 */
+
+	ButtonGroup userTypesGroup = new ButtonGroup();
 
 	JRadioButton heavyUserRB = new JRadioButton();
 
@@ -81,9 +86,14 @@ public class PreferencesDialog extends JDialog {
 
 	JLabel jLabel4 = new JLabel();
 
-	//Added new JLabel startup
-	JLabel startup = new JLabel();				//Note 2: 	change startup variable to startupLabel
-												//			or startupLbl so the reader knows its a label
+	//Added new JLabel startupLabel
+	JLabel startupLabel = new JLabel();
+	//Note 2: change startup variable to startupLabel or
+	//        startupLbl so the reader knows its a label
+
+	/* Original writer reply:
+	 *    Advise is taken. Label is updated
+	 */
 
 	JCheckBox enSystrayChB = new JCheckBox();
 
@@ -166,6 +176,15 @@ public class PreferencesDialog extends JDialog {
 	JLabel monoFontLabel = new JLabel();
 	JLabel baseFontSizeLabel = new JLabel();
 
+	// Build AdvancedPanel
+	JPanel AdvancedPanel = new JPanel(new GridBagLayout());
+	//Note 3: Have AdvancedPanel declared at the top
+	//        of the class like GeneralPanel
+
+	/* Original writer reply:
+	 *     Advise is taken. It is now repositioned.
+	 */
+
 	public PreferencesDialog(Frame frame) {
 		super(frame, Local.getString("Preferences"), true);
 		try {
@@ -185,16 +204,16 @@ public class PreferencesDialog extends JDialog {
 				.getString("Sound"));
 		this.setResizable(false);
 		// Build Tab1
-		userType.setHorizontalAlignment(SwingConstants.RIGHT);
-		userType.setText(Local.getString("User Types:"));
+		userTypeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		userTypeLabel.setText(Local.getString("User Types:"));
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(2, 10, 0, 15);
 		gbc.anchor = GridBagConstraints.EAST;
-		GeneralPanel.add(userType, gbc);
+		GeneralPanel.add(userTypeLabel, gbc);
 
-		userTypes.add(heavyUserRB);
+		userTypesGroup.add(heavyUserRB);
 		heavyUserRB.setText(Local.getString("Heavy User"));
 		heavyUserRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -208,7 +227,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(heavyUserRB, gbc);
 
-		userTypes.add(casualUserRB);
+		userTypesGroup.add(casualUserRB);
 		casualUserRB.setText(Local.getString("Casual User"));
 		casualUserRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -222,7 +241,7 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.WEST;
 		GeneralPanel.add(casualUserRB, gbc);
 
-		userTypes.add(customUserRB);
+		userTypesGroup.add(customUserRB);
 		customUserRB.setText(Local.getString("Custom"));
 		customUserRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -478,18 +497,14 @@ public class PreferencesDialog extends JDialog {
 		((GridLayout)econfPanel.getLayout()).setVgap(5);
 		editorConfigPanel.add(econfPanel, BorderLayout.NORTH);
 
-		// Build AdvancedPanel
-		JPanel AdvancedPanel = new JPanel(new GridBagLayout());	//Note 3: Have AdvancedPanel declared at the top
-																//		of the class like GeneralPanel
-
-		startup.setHorizontalAlignment(SwingConstants.RIGHT);
-		startup.setText(Local.getString("Startup:"));
+		startupLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		startupLabel.setText(Local.getString("Startup:"));
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(2, 10, 0, 15);
 		gbc.anchor = GridBagConstraints.EAST;
-		AdvancedPanel.add(startup, gbc);
+		AdvancedPanel.add(startupLabel, gbc);
 
 		startMinimizedChB.setText(Local.getString("Start minimized"));
 		gbc = new GridBagConstraints();
@@ -877,14 +892,25 @@ public class PreferencesDialog extends JDialog {
 
 	}
 
-	void heavyUserRB_actionPerformed(ActionEvent e) {		//Note4: Why do all these action listeners just call
-		heavyUserRB_actionPerformed();						//       another method with the same name? There are
-	}														//       no conditionals so I don't see why there is a
-															//       need for another method.
+	void heavyUserRB_actionPerformed(ActionEvent e) {
+		heavyUserRB_actionPerformed();
+	}
+	//Note 4: Why do all these action listeners just call
+	//       another method with the same name? There are
+	//       no conditionals so I don't see why there is a
+	//       need for another method.
+
+	/* Original writer reply:
+	 *   It was changed to act this way to establish the "public"
+	 *   status of the function so that JUnit testing can be
+	 *   carried out successfully. I might look into some other
+	 *   options but if they don't work, I will have too keep
+	 *   this as it is.
+	 */
 
 	public void heavyUserRB_actionPerformed()
 	{
-		minTaskbarRB.setSelected(true);		
+		minTaskbarRB.setSelected(true);
 		closeHideRB.setSelected(true);
 		enSystrayChB.setSelected(true);
 		startMinimizedChB.setSelected(true);
