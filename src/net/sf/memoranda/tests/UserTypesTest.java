@@ -16,8 +16,7 @@ import net.sf.memoranda.ui.PreferencesDialog;
 
 public class UserTypesTest {
 
-  PreferencesDialog pDialog = new PreferencesDialog();
-  //ActionEvent e = new ActionEvent();
+  public PreferencesDialog pDialog = new PreferencesDialog();
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -39,13 +38,45 @@ public class UserTypesTest {
   public void heavyUserTest()
   {
     pDialog.heavyUserRB_actionPerformed();
-    assertTrue(pDialog.heavyUserRB_profiled());
+    assertTrue(pDialog.minTaskbarRB_isSelected());
+    assertTrue(pDialog.closeHideRB_isSelected());
+    assertTrue(pDialog.enSystrayChB_isSelected());
+    assertTrue(pDialog.startMinimizedChB_isSelected());
+    assertFalse(pDialog.minHideRB_isSelected());
+    assertFalse(pDialog.closeExitRB_isSelected());
+    assertFalse(pDialog.enSplashChB_isSelected());
   }
 
   @Test
   public void casualUserTest()
   {
     pDialog.casualUserRB_actionPerformed();
-    assertTrue(pDialog.casualUserRB_profiled());
+    assertTrue(pDialog.minTaskbarRB_isSelected());
+    assertTrue(pDialog.closeExitRB_isSelected());
+    assertTrue(pDialog.enSplashChB_isSelected());
+    assertFalse(pDialog.minHideRB_isSelected());
+    assertFalse(pDialog.closeHideRB_isSelected());
+    assertFalse(pDialog.enSystrayChB_isSelected());
+    assertFalse(pDialog.startMinimizedChB_isSelected());
+  }
+
+  @Test
+  public void minGroupTest()
+  {
+    pDialog.minTaskbarRB_setSelected(true);
+    pDialog.minHideRB_setSelected(true);
+    assertFalse(pDialog.minTaskbarRB_isSelected());
+    pDialog.minTaskbarRB_setSelected(true);
+    assertFalse(pDialog.minHideRB_isSelected());
+  }
+
+  @Test
+  public void closeGroupTest()
+  {
+    pDialog.closeExitRB_setSelected(true);
+    pDialog.closeHideRB_setSelected(true);
+    assertFalse(pDialog.closeExitRB_isSelected());
+    pDialog.closeExitRB_setSelected(true);
+    assertFalse(pDialog.closeHideRB_isSelected());
   }
 }

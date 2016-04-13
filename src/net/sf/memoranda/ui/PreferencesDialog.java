@@ -416,7 +416,6 @@ public class PreferencesDialog extends JDialog {
 		gbc.anchor = GridBagConstraints.EAST;
 		GeneralPanel.add(lblExit, gbc);
 
-		askConfirmChB.setSelected(true);
 		askConfirmChB.setText(Local.getString("Ask confirmation"));
 		askConfirmChB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -587,7 +586,6 @@ public class PreferencesDialog extends JDialog {
 		AdvancedPanel.add(jLabel2, gbc);
 
 		closeGroup.add(closeExitRB);
-		closeExitRB.setSelected(true);
 		closeExitRB.setText(Local.getString("Close and exit"));
 		closeExitRB.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -917,11 +915,6 @@ public class PreferencesDialog extends JDialog {
 		enSplashChB.setSelected(false);
 	}
 
-	public boolean heavyUserRB_profiled()
-	{
-		return (minTaskbarRB.isSelected() && closeHideRB.isSelected() && enSystrayChB.isSelected() && startMinimizedChB.isSelected()&& !minHideRB.isSelected() && !closeExitRB.isSelected() && !enSplashChB.isSelected());
-	}
-
 	void casualUserRB_actionPerformed(ActionEvent e) {
 		casualUserRB_actionPerformed();
 	}
@@ -935,9 +928,94 @@ public class PreferencesDialog extends JDialog {
 		enSplashChB.setSelected(true);
 	}
 
-	public boolean casualUserRB_profiled()
+	public void minTaskbarRB_setSelected(boolean state)
 	{
-		return (minTaskbarRB.isSelected() && !minHideRB.isSelected() && closeExitRB.isSelected() && !closeHideRB.isSelected() && !enSystrayChB.isSelected() && !startMinimizedChB.isSelected() && enSplashChB.isSelected());
+		minTaskbarRB.setSelected(state);
+	}
+
+	public void minHideRB_setSelected(boolean state)
+	{
+		minHideRB.setSelected(state);
+	}
+
+	public boolean minTaskbarRB_isSelected()
+	{
+		return minTaskbarRB.isSelected();
+	}
+
+	public boolean minHideRB_isSelected()
+	{
+		return minHideRB.isSelected();
+	}
+
+	public void closeHideRB_setSelected(boolean state)
+	{
+		closeHideRB.setSelected(state);
+	}
+
+	public void closeExitRB_setSelected(boolean state)
+	{
+		closeExitRB.setSelected(state);
+	}
+
+	public boolean closeHideRB_isSelected()
+	{
+		return closeHideRB.isSelected();
+	}
+
+	public boolean closeExitRB_isSelected()
+	{
+		return closeExitRB.isSelected();
+	}
+
+	public void startMinimizedChB_setSelected(boolean state)
+	{
+		startMinimizedChB.setSelected(state);
+	}
+
+	public boolean startMinimizedChB_isSelected()
+	{
+		return startMinimizedChB.isSelected();
+	}
+
+	public void enSystrayChB_setSelected(boolean state)
+	{
+		enSystrayChB.setSelected(state);
+	}
+
+	public boolean enSystrayChB_isSelected()
+	{
+		return enSystrayChB.isSelected();
+	}
+
+	public void enSplashChB_setSelected(boolean state)
+	{
+		enSplashChB.setSelected(state);
+	}
+
+	public boolean enSplashChB_isSelected()
+	{
+		return enSplashChB.isSelected();
+	}
+
+	public boolean heavyUserRB_isSelected()
+	{
+		return heavyUserRB.isSelected();
+	}
+
+	public boolean casualUserRB_isSelected()
+	{
+		return casualUserRB.isSelected();
+	}
+
+	public boolean placeHolderTest()
+	{
+		return true;
+	}
+
+	public boolean customUserRB_isSelected()
+	{
+		return customUserRB.isSelected();
 	}
 
 	void okB_actionPerformed(ActionEvent e) {
