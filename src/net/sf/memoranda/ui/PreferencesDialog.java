@@ -1008,11 +1008,6 @@ public class PreferencesDialog extends JDialog {
 		return casualUserRB.isSelected();
 	}
 
-	public boolean placeHolderTest()
-	{
-		return true;
-	}
-
 	public boolean customUserRB_isSelected()
 	{
 		return customUserRB.isSelected();
