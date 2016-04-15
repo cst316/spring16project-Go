@@ -10,18 +10,17 @@ import java.io.IOException;
 
 public class TimerModel
 {
-  private int hours;
-  private int minutes;
-  private int seconds;
+  public int hours;
+  public int minutes;
+  public int seconds;
   
   public TimerModel()
   {
     restartTimer();
   }
   
-  public void restartTimer()
-  {
-    setTime(loadTimeValue());
+  public void restartTimer(){
+	  setTime(loadTimeValue());
   }
   
   public void setTime(String time)
@@ -63,7 +62,7 @@ public class TimerModel
     return false;
   }
   
-  private void storeTimeValue(String time)
+  protected void storeTimeValue(String time)
   {
     try
     {
@@ -78,7 +77,7 @@ public class TimerModel
     }
   }
   
-  private String loadTimeValue()
+  protected String loadTimeValue()
   {
     String result = "00:02:00";
     try

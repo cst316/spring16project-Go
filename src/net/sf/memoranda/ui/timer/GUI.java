@@ -17,7 +17,7 @@ import net.sf.memoranda.util.Configuration;
 public class GUI
   extends JFrame
 {
-  private TimerModel timerModel = new TimerModel();
+  private TimerModel timerModel = new TimerModelSafe();
   private StopWatchModel stopWatchModel = new StopWatchModel();
   private AlarmModel alarmModel = new AlarmModel();
   private TimerPanel timerPanel;

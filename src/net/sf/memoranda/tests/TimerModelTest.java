@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.lang.reflect.*;
 import java.util.Calendar;
 import net.sf.memoranda.ui.timer.TimerModel;
+import net.sf.memoranda.ui.timer.TimerModelSafe;
 
 import static org.junit.Assert.*;
 
