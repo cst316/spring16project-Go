@@ -506,6 +506,11 @@ public class PreferencesDialog extends JDialog {
 		AdvancedPanel.add(startupLabel, gbc);
 
 		startMinimizedChB.setText(Local.getString("Start minimized"));
+		startMinimizedChB.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startMinimizedChB_actionPerformed(e);
+			}
+		});
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 0;
@@ -858,7 +863,6 @@ public class PreferencesDialog extends JDialog {
 		App.getFrame().workPanel.dailyItemsPanel.editorPanel.editor.repaint();
 
 		Configuration.saveConfig();
-
 	}
 
 	void customUser() {
@@ -887,7 +891,6 @@ public class PreferencesDialog extends JDialog {
 		this.soundFileBrowseB.setEnabled(is && soundCustomRB.isSelected());
 		this.soundFile.setEnabled(is && soundCustomRB.isSelected());
 		this.jLabel6.setEnabled(is && soundCustomRB.isSelected());
-
 	}
 
 	void heavyUserRB_actionPerformed(ActionEvent e) {
@@ -908,6 +911,7 @@ public class PreferencesDialog extends JDialog {
 
 	public void heavyUserRB_actionPerformed()
 	{
+		heavyUserRB.setSelected(true);
 		minTaskbarRB.setSelected(true);
 		closeHideRB.setSelected(true);
 		enSystrayChB.setSelected(true);
@@ -921,6 +925,7 @@ public class PreferencesDialog extends JDialog {
 
 	public void casualUserRB_actionPerformed()
 	{
+		casualUserRB.setSelected(true);
 		minTaskbarRB.setSelected(true);
 		closeExitRB.setSelected(true);
 		enSystrayChB.setSelected(false);
@@ -931,11 +936,13 @@ public class PreferencesDialog extends JDialog {
 	public void minTaskbarRB_setSelected(boolean state)
 	{
 		minTaskbarRB.setSelected(state);
+		customUser();
 	}
 
 	public void minHideRB_setSelected(boolean state)
 	{
 		minHideRB.setSelected(state);
+		customUser();
 	}
 
 	public boolean minTaskbarRB_isSelected()
@@ -951,11 +958,13 @@ public class PreferencesDialog extends JDialog {
 	public void closeHideRB_setSelected(boolean state)
 	{
 		closeHideRB.setSelected(state);
+		customUser();
 	}
 
 	public void closeExitRB_setSelected(boolean state)
 	{
 		closeExitRB.setSelected(state);
+		customUser();
 	}
 
 	public boolean closeHideRB_isSelected()
@@ -981,6 +990,7 @@ public class PreferencesDialog extends JDialog {
 	public void enSystrayChB_setSelected(boolean state)
 	{
 		enSystrayChB.setSelected(state);
+		customUser();
 	}
 
 	public boolean enSystrayChB_isSelected()
@@ -991,6 +1001,7 @@ public class PreferencesDialog extends JDialog {
 	public void enSplashChB_setSelected(boolean state)
 	{
 		enSplashChB.setSelected(state);
+		customUser();
 	}
 
 	public boolean enSplashChB_isSelected()
@@ -1023,15 +1034,15 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	void minTaskbarRB_actionPerformed(ActionEvent e) {
-		customUser();
+		minTaskbarRB_setSelected(true);
 	}
 
 	void minHideRB_actionPerformed(ActionEvent e) {
-		customUser();
+		minHideRB_setSelected(true);
 	}
 
 	void closeExitRB_actionPerformed(ActionEvent e) {
-		customUser();
+		closeExitRB_setSelected(true);
 		// this.askConfirmChB.setEnabled(true);
 	}
 
@@ -1040,7 +1051,7 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	void closeHideRB_actionPerformed(ActionEvent e) {
-		customUser();
+		closeHideRB_setSelected(true);
 		// this.askConfirmChB.setEnabled(false);
 	}
 
@@ -1062,12 +1073,16 @@ public class PreferencesDialog extends JDialog {
 		this.enableCustomLF(true);
 	}
 
+	void startMinimizedChB_actionPerformed(ActionEvent e) {
+		startMinimizedChB_setSelected(startMinimizedChB.isSelected());
+	}
+
 	void enSystrayChB_actionPerformed(ActionEvent e) {
-		customUser();
+		enSystrayChB_setSelected(enSystrayChB.isSelected());
 	}
 
 	void enSplashChB_actionPerformed(ActionEvent e) {
-		customUser();
+		enSplashChB_setSelected(enSplashChB.isSelected());
 	}
 
 	void enL10nChB_actionPerformed(ActionEvent e) {
