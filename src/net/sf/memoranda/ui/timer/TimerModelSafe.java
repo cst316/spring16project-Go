@@ -20,7 +20,7 @@ public class TimerModelSafe extends TimerModel {
 				 throw new InvalidParameterException();
 			 }
 			 
-			 safeTime = formatTimeSafe(Integer.parseInt(times[0]), Integer.parseInt(times[1]), Integer.parseInt(times[2]));
+			 safeTime = formatTimeSafe(Integer.parseInt(times[0]), Integer.parseInt(times[1]), Integer.parseInt(times[2]));//Alexander Code review notes: Longer then 200 characeter
 
 		 }catch(Exception e){
 			 System.out.print("Invalid time value: ");
@@ -63,7 +63,7 @@ public class TimerModelSafe extends TimerModel {
 	 
 	 public String getTime(){
 		 String[] times = super.getTime().split(":");
-		 return formatTimeSafe(Integer.parseInt(times[0]), Integer.parseInt(times[1]), Integer.parseInt(times[2]));
+		 return formatTimeSafe(Integer.parseInt(times[0]), Integer.parseInt(times[1]), Integer.parseInt(times[2]));  //Alexander Code review notes: Longer then 200 characeter
 		 
 	  }
 	
