@@ -70,6 +70,9 @@ public class AlarmModel
     int hours = calendar.get(11);
     int minutes = calendar.get(12);
     int seconds = calendar.get(13);
+    
+    //Alexander Calderon Notes: Possible to do this.hour hour = new this.hour or timeUp = this.hour && this.minutes && this.seconds
+    //to make this likes of code shorter?
     if ((this.hours == hours) && (this.minutes == minutes) && (this.seconds == seconds) && (this.enabled)) {
       return true;
     }
