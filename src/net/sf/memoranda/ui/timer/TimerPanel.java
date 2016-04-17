@@ -56,3 +56,6 @@ public class TimerPanel
     this.startCommand.setText(command);
   }
 }
+//Alexander Calderon Review Notes: I feel like there should
+//be a summery in comment of what each block of code is doing, 
+//Though I think the naming the methods helps with that 
