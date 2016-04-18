@@ -980,6 +980,7 @@ public class PreferencesDialog extends JDialog {
 	public void startMinimizedChB_setSelected(boolean state)
 	{
 		startMinimizedChB.setSelected(state);
+		customUser();
 	}
 
 	public boolean startMinimizedChB_isSelected()
