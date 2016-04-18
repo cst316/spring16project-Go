@@ -19,7 +19,7 @@ public class GUI
 {
   private TimerModel timerModel = new TimerModelSafe();
   private StopWatchModel stopWatchModel = new StopWatchModel();
-  private AlarmModel alarmModel = new AlarmModel();
+  private AlarmModel alarmModel = new AlarmModelSafe();
   private TimerPanel timerPanel;
   private StopWatchPanel stopWatchPanel;
   private AlarmPanel alarmPanel;
