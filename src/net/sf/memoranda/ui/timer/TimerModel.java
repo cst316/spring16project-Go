@@ -10,9 +10,9 @@ import java.io.IOException;
 
 public class TimerModel
 {
-  public int hours;
-  public int minutes;
-  public int seconds;
+  private int hours;
+  private int minutes;
+  private int seconds;
   
   public TimerModel()
   {

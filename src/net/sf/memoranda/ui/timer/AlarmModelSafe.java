@@ -2,18 +2,11 @@ package net.sf.memoranda.ui.timer;
 
 import java.security.InvalidParameterException;
 
-public class TimerModelSafe extends TimerModel {
+public class AlarmModelSafe extends AlarmModel {
+
 	
-	 public TimerModelSafe(){
-		 this.restartTimer();
-	  }
-	 
-	 public void restartTimer(){
-		 this.setTime(loadTimeValue());
-	  }
-	 
-	 public void setTime(String time){
-		 String safeTime = "00:02:00";
+	public void setAlarmTime(String time){
+		 String safeTime = super.getTime();
 		 String[] times = time.split(":");
 		 try{
 			 if (times.length != 3){
@@ -31,7 +24,7 @@ public class TimerModelSafe extends TimerModel {
 			 }
 			 System.out.println("setting time to "+ safeTime);
 		 }
-		 super.setTime(safeTime);
+		 super.setAlarmTime(safeTime);
 	  }
 	 
 	 private String formatTimeSafe(int hours, int minutes, int seconds){
@@ -41,7 +34,7 @@ public class TimerModelSafe extends TimerModel {
 		 safeMinutes = seconds / 60;
 		 safeMinutes += minutes % 60;
 		 safeHours = minutes / 60;
-		 safeHours += hours % 100;
+		 safeHours += hours % 24;
 		 
 		 if (safeHours < 10) {
 		      safeTime = "0" + safeHours;   
@@ -60,14 +53,9 @@ public class TimerModelSafe extends TimerModel {
 		 }
 		 return safeTime;
 	 }
-	 
-	 public String getTime(){
-		 String[] times = super.getTime().split(":");
+	 public String getAlarmTime(){
+		 String[] times = super.getAlarmTime().split(":");
 		 return formatTimeSafe(Integer.parseInt(times[0]), Integer.parseInt(times[1]), Integer.parseInt(times[2]));  //Alexander Code review notes: Longer then 200 characeter
 		 
 	  }
-	 
-	 
-	
-
 }

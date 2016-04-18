@@ -2,7 +2,6 @@ package net.sf.memoranda.tests;
 
 import org.junit.*;
 import static org.junit.Assert.*;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,11 +17,16 @@ import net.sf.memoranda.ui.timer.AlarmModel;
 
 public class TimerModelTest {
 	public TimerModel timerModel;
+	public Class baseClass;
 	
 	//execute for each test, before executing test
 	@Before
 	public void before(){
-		timerModel = new TimerModel();
+		timerModel = new TimerModelSafe();
+		baseClass = timerModel.getClass();
+		while (baseClass.equals(TimerModel.class)== false){
+			baseClass = baseClass.getSuperclass();
+		}
 	}
 		
 	@Test
@@ -33,15 +37,16 @@ public class TimerModelTest {
 		
 		timerModel.restartTimer();
 		
-		field = timerModel.getClass().getDeclaredField("hours");
+		
+		field = baseClass.getDeclaredField("hours");
 		field.setAccessible(true);
 		hours = field.getInt(timerModel);
 		
-		field = timerModel.getClass().getDeclaredField("minutes");
+		field = baseClass.getDeclaredField("minutes");
 		field.setAccessible(true);
 		minutes = field.getInt(timerModel);
 		
-		field = timerModel.getClass().getDeclaredField("seconds");
+		field = baseClass.getDeclaredField("seconds");
 		field.setAccessible(true);
 		seconds = field.getInt(timerModel);
 		
@@ -69,52 +74,70 @@ public class TimerModelTest {
 		
 		timerModel.setTime("05:05:05");
 		
-		Field field = timerModel.getClass().getDeclaredField("hours");
+		Field field = baseClass.getDeclaredField("hours");
 		field.setAccessible(true);
 		hours = field.getInt(timerModel);
 		
-		field = timerModel.getClass().getDeclaredField("minutes");
+		field = baseClass.getDeclaredField("minutes");
 		field.setAccessible(true);
 		minutes = field.getInt(timerModel);
 		
-		field = timerModel.getClass().getDeclaredField("seconds");
+		field = baseClass.getDeclaredField("seconds");
 		field.setAccessible(true);
 		seconds = field.getInt(timerModel);
 		
-		assertEquals(hours,	(int) 5);
-		assertEquals(minutes, (int) 5);
-		assertEquals(seconds, (int) 5);
+		assertEquals((int)5, hours);
+		assertEquals((int)5, minutes);
+		assertEquals((int)5, seconds);
+		
+		timerModel.setTime("20:61:61");
+		
+		field = baseClass.getDeclaredField("hours");
+		field.setAccessible(true);
+		hours = field.getInt(timerModel);
+		
+		field = baseClass.getDeclaredField("minutes");
+		field.setAccessible(true);
+		minutes = field.getInt(timerModel);
+		
+		field = baseClass.getDeclaredField("seconds");
+		field.setAccessible(true);
+		seconds = field.getInt(timerModel);
+		
+		assertEquals((int)21, hours);
+		assertEquals((int)2, minutes);
+		assertEquals((int)1, seconds);
 	}
 	
 	@Test
 	public void getTimeTest() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException{
-		Field field = timerModel.getClass().getDeclaredField("hours");
+		Field field = baseClass.getDeclaredField("hours");
 		field.setAccessible(true);
 		field.setInt(timerModel, 5);
 		
-		field = timerModel.getClass().getDeclaredField("minutes");
+		field = baseClass.getDeclaredField("minutes");
 		field.setAccessible(true);
 		field.setInt(timerModel, 5);
 		
-		field = timerModel.getClass().getDeclaredField("seconds");
+		field = baseClass.getDeclaredField("seconds");
 		field.setAccessible(true);
 		field.setInt(timerModel, 5);
 		
-		assertEquals(timerModel.getTime(), "05:05:05");
+		assertEquals("05:05:05", timerModel.getTime());
 		
-		field = timerModel.getClass().getDeclaredField("hours");
+		field = baseClass.getDeclaredField("hours");
 		field.setAccessible(true);
 		field.setInt(timerModel, 20);
 		
-		field = timerModel.getClass().getDeclaredField("minutes");
+		field = baseClass.getDeclaredField("minutes");
 		field.setAccessible(true);
 		field.setInt(timerModel, 61);
 		
-		field = timerModel.getClass().getDeclaredField("seconds");
+		field = baseClass.getDeclaredField("seconds");
 		field.setAccessible(true);
 		field.setInt(timerModel, 61); 
 		
-		assertEquals(timerModel.getTime(), "21:02:01");
+		assertEquals("21:02:01", timerModel.getTime());
 	}
 
 }
