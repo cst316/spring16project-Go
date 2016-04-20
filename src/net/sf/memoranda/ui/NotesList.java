@@ -24,7 +24,7 @@ import net.sf.memoranda.ResourcesList;
 import net.sf.memoranda.TaskList;
 import net.sf.memoranda.date.CalendarDate;
 import net.sf.memoranda.date.CurrentDate;
-import net.sf.memoranda.date.DateListener;
+import net.sf.memoranda.date.IDateListener;
 import net.sf.memoranda.util.Configuration;
 //import net.sf.memoranda.util.NotesVectorSorter;
 
@@ -48,7 +48,7 @@ public class NotesList extends JList {
         _type = type;
         this.setFont(new java.awt.Font("Dialog", 0, 11));
         this.setModel(new NotesListModel());
-        CurrentDate.addDateListener(new DateListener() {
+        CurrentDate.addDateListener(new IDateListener() {
             public void dateChange(CalendarDate d) {
                 updateUI();
             }

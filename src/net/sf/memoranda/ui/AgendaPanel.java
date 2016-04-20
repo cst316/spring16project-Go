@@ -33,7 +33,7 @@ import net.sf.memoranda.ResourcesList;
 import net.sf.memoranda.TaskList;
 import net.sf.memoranda.date.CalendarDate;
 import net.sf.memoranda.date.CurrentDate;
-import net.sf.memoranda.date.DateListener;
+import net.sf.memoranda.date.IDateListener;
 import net.sf.memoranda.util.AgendaGenerator;
 import net.sf.memoranda.util.CurrentStorage;
 import net.sf.memoranda.util.Local;
@@ -240,7 +240,7 @@ public class AgendaPanel extends JPanel {
 
 		this.add(toolBar, BorderLayout.NORTH);
 
-		CurrentDate.addDateListener(new DateListener() {
+		CurrentDate.addDateListener(new IDateListener() {
 			public void dateChange(CalendarDate d) {
 				if (isActive)
 					refresh(d);

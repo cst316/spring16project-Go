@@ -52,7 +52,7 @@ import javax.swing.tree.*;
 import net.sf.memoranda.*;
 import net.sf.memoranda.date.CalendarDate;
 import net.sf.memoranda.date.CurrentDate;
-import net.sf.memoranda.date.DateListener;
+import net.sf.memoranda.date.IDateListener;
 import net.sf.memoranda.ui.treetable.*;
 
 /**
@@ -103,7 +103,7 @@ public class TaskTable extends JTable {
         tree.setSelectionModel(selectionWrapper);
         setSelectionModel(selectionWrapper.getListSelectionModel());
 
-        CurrentDate.addDateListener(new DateListener() {
+        CurrentDate.addDateListener(new IDateListener() {
             public void dateChange(CalendarDate d) {
                 //updateUI();
                 tableChanged();

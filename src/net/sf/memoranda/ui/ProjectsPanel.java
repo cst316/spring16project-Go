@@ -42,13 +42,13 @@ import net.sf.memoranda.ResourcesList;
 import net.sf.memoranda.TaskList;
 import net.sf.memoranda.date.CalendarDate;
 import net.sf.memoranda.date.CurrentDate;
-import net.sf.memoranda.date.DateListener;
+import net.sf.memoranda.date.IDateListener;
 import net.sf.memoranda.util.Context;
 import net.sf.memoranda.util.CurrentStorage;
 import net.sf.memoranda.util.*;
 
 /*$Id: ProjectsPanel.java,v 1.14 2005/01/04 09:59:22 pbielen Exp $*/
-public class ProjectsPanel extends JPanel implements ExpandablePanel {
+public class ProjectsPanel extends JPanel implements IExpandablePanel {
 	BorderLayout borderLayout1 = new BorderLayout();
 	JToolBar topBar = new JToolBar();
 	JPanel toolbarPanel = new JPanel();
@@ -250,7 +250,7 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 				prjTablePanel.updateUI();
 			}
 		});
-		CurrentDate.addDateListener(new DateListener() {
+		CurrentDate.addDateListener(new IDateListener() {
 			public void dateChange(CalendarDate d) {
 				prjTablePanel.updateUI();
 			}
