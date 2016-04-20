@@ -5,6 +5,7 @@ Done since 20160401
 - Fixed: "Start minimized" selection change were not auto-selecting "Custom" user type
 - Safe zone for AlarmModel is added
 - TimingTest is removed
+- "ON_MINIMIZE" will now be saved as according to the user's selection
 
 Done since 20160304
 
