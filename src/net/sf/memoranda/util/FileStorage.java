@@ -41,7 +41,7 @@ import nu.xom.Document;
  *
  */
 /*$Id: FileStorage.java,v 1.15 2006/10/09 23:31:58 alexeya Exp $*/
-public class FileStorage implements Storage {
+public class FileStorage implements IStorage {
 
     public static String JN_DOCPATH = Util.getEnvDir();
     private HTMLEditorKit editorKit = new HTMLEditorKit();
@@ -105,7 +105,7 @@ public class FileStorage implements Storage {
     }
 
     /**
-     * @see net.sf.memoranda.util.Storage#storeNote(net.sf.memoranda.Note)
+     * @see net.sf.memoranda.util.IStorage#storeNote(net.sf.memoranda.Note)
      */
     public void storeNote(Note note, javax.swing.text.Document doc) {
         String filename =
@@ -157,7 +157,7 @@ public class FileStorage implements Storage {
 
     }
     /**
-     * @see net.sf.memoranda.util.Storage#openNote(net.sf.memoranda.Note)
+     * @see net.sf.memoranda.util.IStorage#openNote(net.sf.memoranda.Note)
      */
     public javax.swing.text.Document openNote(Note note) {
 
@@ -228,7 +228,7 @@ public class FileStorage implements Storage {
     }
 
     /**
-     * @see net.sf.memoranda.util.Storage#openProjectManager()
+     * @see net.sf.memoranda.util.IStorage#openProjectManager()
      */
     public void openProjectManager() {
         if (!new File(JN_DOCPATH + ".projects").exists()) {
@@ -241,7 +241,7 @@ public class FileStorage implements Storage {
         ProjectManager._doc = openDocument(JN_DOCPATH + ".projects");
     }
     /**
-     * @see net.sf.memoranda.util.Storage#storeProjectManager(nu.xom.Document)
+     * @see net.sf.memoranda.util.IStorage#storeProjectManager(nu.xom.Document)
      */
     public void storeProjectManager() {
         /*DEBUG*/
@@ -250,7 +250,7 @@ public class FileStorage implements Storage {
         saveDocument(ProjectManager._doc, JN_DOCPATH + ".projects");
     }
     /**
-     * @see net.sf.memoranda.util.Storage#removeProject(net.sf.memoranda.Project)
+     * @see net.sf.memoranda.util.IStorage#removeProject(net.sf.memoranda.Project)
      */
     public void removeProjectStorage(Project prj) {
         String id = prj.getID();
@@ -306,7 +306,7 @@ public class FileStorage implements Storage {
         saveDocument(tasklistDoc,JN_DOCPATH + prj.getID() + File.separator + ".tasklist");
     }
     /**
-     * @see net.sf.memoranda.util.Storage#createProjectStorage(net.sf.memoranda.Project)
+     * @see net.sf.memoranda.util.IStorage#createProjectStorage(net.sf.memoranda.Project)
      */
     public void createProjectStorage(Project prj) {
         /*DEBUG*/
@@ -316,7 +316,7 @@ public class FileStorage implements Storage {
         dir.mkdirs();
     }
     /**
-     * @see net.sf.memoranda.util.Storage#openNoteList(net.sf.memoranda.Project)
+     * @see net.sf.memoranda.util.IStorage#openNoteList(net.sf.memoranda.Project)
      */
     public NoteList openNoteList(Project prj) {
         String fn = JN_DOCPATH + prj.getID() + File.separator + ".notes";
@@ -337,7 +337,7 @@ public class FileStorage implements Storage {
         }
     }
     /**
-     * @see net.sf.memoranda.util.Storage#storeNoteList(net.sf.memoranda.NoteList, net.sf.memoranda.Project)
+     * @see net.sf.memoranda.util.IStorage#storeNoteList(net.sf.memoranda.NoteList, net.sf.memoranda.Project)
      */
     public void storeNoteList(NoteList nl, Project prj) {
         /*DEBUG*/
@@ -352,7 +352,7 @@ public class FileStorage implements Storage {
             JN_DOCPATH + prj.getID() + File.separator + ".notes");
     }
     /**
-     * @see net.sf.memoranda.util.Storage#openEventsList()
+     * @see net.sf.memoranda.util.IStorage#openEventsList()
      */
     public void openEventsManager() {
         if (!new File(JN_DOCPATH + ".events").exists()) {
@@ -365,7 +365,7 @@ public class FileStorage implements Storage {
         EventsManager._doc = openDocument(JN_DOCPATH + ".events");
     }
     /**
-     * @see net.sf.memoranda.util.Storage#storeEventsList()
+     * @see net.sf.memoranda.util.IStorage#storeEventsList()
      */
     public void storeEventsManager() {
         /*DEBUG*/
@@ -374,7 +374,7 @@ public class FileStorage implements Storage {
         saveDocument(EventsManager._doc, JN_DOCPATH + ".events");
     }
     /**
-     * @see net.sf.memoranda.util.Storage#openMimeTypesList()
+     * @see net.sf.memoranda.util.IStorage#openMimeTypesList()
      */
     public void openMimeTypesList() {
         if (!new File(JN_DOCPATH + ".mimetypes").exists()) {
@@ -398,7 +398,7 @@ public class FileStorage implements Storage {
         MimeTypesList._doc = openDocument(JN_DOCPATH + ".mimetypes");
     }
     /**
-     * @see net.sf.memoranda.util.Storage#storeMimeTypesList()
+     * @see net.sf.memoranda.util.IStorage#storeMimeTypesList()
      */
     public void storeMimeTypesList() {
         /*DEBUG*/
@@ -407,7 +407,7 @@ public class FileStorage implements Storage {
         saveDocument(MimeTypesList._doc, JN_DOCPATH + ".mimetypes");
     }
     /**
-     * @see net.sf.memoranda.util.Storage#openResourcesList(net.sf.memoranda.Project)
+     * @see net.sf.memoranda.util.IStorage#openResourcesList(net.sf.memoranda.Project)
      */
     public ResourcesList openResourcesList(Project prj) {
         String fn = JN_DOCPATH + prj.getID() + File.separator + ".resources";
@@ -423,7 +423,7 @@ public class FileStorage implements Storage {
         }
     }
     /**
-     * @see net.sf.memoranda.util.Storage#storeResourcesList(net.sf.memoranda.ResourcesList, net.sf.memoranda.Project)
+     * @see net.sf.memoranda.util.IStorage#storeResourcesList(net.sf.memoranda.ResourcesList, net.sf.memoranda.Project)
      */
     public void storeResourcesList(ResourcesList rl, Project prj) {
         /*DEBUG*/
@@ -438,7 +438,7 @@ public class FileStorage implements Storage {
             JN_DOCPATH + prj.getID() + File.separator + ".resources");
     }
     /**
-     * @see net.sf.memoranda.util.Storage#restoreContext()
+     * @see net.sf.memoranda.util.IStorage#restoreContext()
      */
     public void restoreContext() {
         try {
@@ -453,7 +453,7 @@ public class FileStorage implements Storage {
         }
     }
     /**
-     * @see net.sf.memoranda.util.Storage#storeContext()
+     * @see net.sf.memoranda.util.IStorage#storeContext()
      */
     public void storeContext() {
         try {

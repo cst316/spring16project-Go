@@ -16,7 +16,7 @@ import java.util.Vector;
 import net.sf.memoranda.ui.AppFrame;
 import net.sf.memoranda.util.Context;
 import net.sf.memoranda.util.CurrentStorage;
-import net.sf.memoranda.util.Storage;
+import net.sf.memoranda.util.IStorage;
 
 /**
  *
@@ -113,7 +113,7 @@ public class CurrentProject {
     }
 
     public static void save() {
-        Storage storage = CurrentStorage.get();
+        IStorage storage = CurrentStorage.get();
 
         storage.storeNoteList(_notelist, _project);
         storage.storeTaskList(_tasklist, _project); 

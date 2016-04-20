@@ -17,7 +17,7 @@ import net.sf.memoranda.TaskList;
  * 
  */
 /*$Id: Storage.java,v 1.4 2004/01/30 12:17:42 alexeya Exp $*/
-public interface Storage {
+public interface IStorage {
             
     TaskList openTaskList(Project prj);    
     void storeTaskList(TaskList tl, Project prj);
