@@ -1,16 +1,23 @@
 [![Build Status](https://travis-ci.org/cst316/spring16project-Go.svg?branch=master)](https://travis-ci.org/cst316/spring16project-Go)
-# spring16project
-This is the initial dump for the cst316 spring 2016 project. It is a slightly modified version of the Memoranda project from memoranda.sf.net
 
-The purpose of this project is to enhance the Memoranda application to support Time Management for Software Engineers. In essence, to augment Memoranda with features that support the time management concepts in the Personal Software Process, which you learned some of last year in SER215.
+GETTING STARTED WITH Memoranda
+==============================
 
-Memoranda is a project that has largely been dormant since 2007, so why are we using it? I have used this codebase in the past, it is of sufficient size and scope to challenge your skills in understanding a complete application (it has somewhere in the neighborhood of 25k lines of code). It also has features that just about anyone who has ever used a calendaring application can understand. Further, I have some documents from a former student project (one of the best ever done in my projects' classes) that we can leverage to help you bootstrap your Agile process.
+This is your guide!
 
-In the docs directory are a few starting documents that may help you get going on your User Stories. The first is a Project Inception document. This short document describes the vision of the project, and can serve as a guide as you write your Sprint Goals. One is a SRS - Software Requirements Specification - which has 21 use cases that you can readily translate to stories. However you are not constrained to just use these nor are you required to use all of them. 
+Welcome to Memoranda
+--------------------
 
-Also in the docs directory is an initial set of analysis models - class diagrams and sequence diagrams in UML, that a previous team did as part of their solution process. These were included only in the event that you may want to use these as a head start on your design and implementation work. You are absolutely not required to use or implement anything in the analysis document!
+Memoranda is a different type of modern day technology.
 
-Your first steps should be to get your team set up with this code, ensure you can build it and run it. The ant script should work, and you should also be able to run it directly from within Eclipse or the command line or from the .bat/.sh scripts provided.
+Memoranda is a personal tool designed to help someone to organize his/her work and actual projects. Memoranda is intended for the people, whose daily work is shared between a few different projects. This is a tool helping to keep your projects, irrespective of their nature. It aims to solve the following needs:
 
-Enjoy!
-Dr. Gary
+- To have the one solid place where you can see a list of current projects, browse and edit them, add new and remove out-of-date projects.
+- To edit and browse the project documentation. As almost all projects are the processes in a time, we assumed that the time-based diaries would be a better form of organizing the project-related documents, rather than folders and files.
+create and edit "to-do" checklists. It allows to set the time bounds for every task in checklist, mark a task's progress and see what is already done and on what you should pay your attention today.
+- To have an access to project-related resources (such as external files and web-pages) within one solid workplace. You can collect shortcuts to resources from various locations (local files as well as internet resources) and define an application for opening an each resource type.
+- To schedule the events and get the notifications when they are occurred.
+
+You can download the latest release build from the github website. Your feedback is very important for us. Feel Free to submit your opinions and suggestion about Memoranda, bug reports and other contributions. Enjoy!
+
+Click [here](http://www.public.asu.edu/~aacalde1/memoranda.html) to find out more information on our site.
