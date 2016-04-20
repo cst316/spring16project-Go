@@ -144,13 +144,13 @@ public class TaskTable extends JTable {
 		
 		
 		tree.setCellRenderer(renderer);
-		setDefaultRenderer(TreeTableModel.class, tree);
+		setDefaultRenderer(ITreeTableModel.class, tree);
 		setDefaultRenderer(Integer.class, renderer);
 		setDefaultRenderer(TaskTable.class, renderer);
 		setDefaultRenderer(String.class, renderer);
 		setDefaultRenderer(java.util.Date.class, renderer);
 
-		setDefaultEditor(TreeTableModel.class, new TreeTableCellEditor());
+		setDefaultEditor(ITreeTableModel.class, new TreeTableCellEditor());
 		
 		// column name is repeated in 2 places, do something about it!
 		getColumn( "% " + Local.getString("done") ).setCellEditor(new TaskProgressEditor());
@@ -228,7 +228,7 @@ public class TaskTable extends JTable {
      * ensures the editor is never painted.
      */
     public int getEditingRow() {
-        return (getColumnClass(editingColumn) == TreeTableModel.class) ? -1
+        return (getColumnClass(editingColumn) == ITreeTableModel.class) ? -1
                 : editingRow;
     }
 
@@ -363,7 +363,7 @@ public class TaskTable extends JTable {
         public boolean isCellEditable(EventObject e) {
             if (e instanceof MouseEvent) {
                 for (int counter = getColumnCount() - 1; counter >= 0; counter--) {
-                    if (getColumnClass(counter) == TreeTableModel.class) {
+                    if (getColumnClass(counter) == ITreeTableModel.class) {
                         MouseEvent me = (MouseEvent) e;
                         MouseEvent newME = new MouseEvent(tree, me.getID(), me
                                 .getWhen(), me.getModifiers(), me.getX()

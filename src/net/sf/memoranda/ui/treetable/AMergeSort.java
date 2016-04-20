@@ -25,7 +25,7 @@ package net.sf.memoranda.ui.treetable;
  *
  * @author Scott Violet
  */
-public abstract class MergeSort extends Object {
+public abstract class AMergeSort extends Object {
     protected Object           toSort[];
     protected Object           swapSpace[];
 
