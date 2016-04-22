@@ -4,6 +4,8 @@ package net.sf.memoranda.ui.timer;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+
 import javax.sound.midi.*;
 
 public class SoundEngine{
@@ -13,7 +15,8 @@ public class SoundEngine{
 	
 	public void playSound(){
 	  Sequence sequence = null;
-	  File midiFile = new File("src/net/sf/memoranda/ui/timer/nokia_tune.mid");
+	  //File midiFile = new File("src/net/sf/memoranda/ui/timer/nokia_tune.mid");
+	  URL midiFile = getClass().getResource("nokia_tune.mid");
 
 		/*
 		 *	We read in the MIDI file to a Sequence object.
