@@ -1,6 +1,7 @@
 package net.sf.memoranda.ui.timer;
 
 
+
 import java.io.File;
 import java.io.IOException;
 import javax.sound.midi.*;
@@ -12,7 +13,7 @@ public class SoundEngine{
 	
 	public void playSound(){
 	  Sequence sequence = null;
-	  File midiFile = new File("nokia_tune.mid");
+	  File midiFile = new File("src/net/sf/memoranda/ui/timer/nokia_tune.mid");
 
 		/*
 		 *	We read in the MIDI file to a Sequence object.
@@ -87,7 +88,7 @@ public class SoundEngine{
 		/*
 		 *	The Sequencer is still a dead object.
 		 *	We have to open() it to become live.
-		 *	This is necessary to allocate some ressources in
+		 *	This is necessary to allocate some resources in
 		 *	the native part.
 		 */
 		try
