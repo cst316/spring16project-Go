@@ -14,44 +14,40 @@ import javax.swing.Timer;
 import net.sf.memoranda.ui.AppFrame;
 import net.sf.memoranda.util.Configuration;
 
-public class GUI
-  extends JFrame
-{
-  private TimerModel timerModel = new TimerModelSafe();
-  private StopWatchModel stopWatchModel = new StopWatchModel();
-  private AlarmModel alarmModel = new AlarmModelSafe();
-  private TimerPanel timerPanel;
-  private StopWatchPanel stopWatchPanel;
-  private AlarmPanel alarmPanel;
+public class GUI extends JFrame{
+	private TimerModel timerModel = new TimerModelSafe();
+	private StopWatchModel stopWatchModel = new StopWatchModel();
+	private AlarmModel alarmModel = new AlarmModelSafe();
+	private TimerPanel timerPanel;
+	private StopWatchPanel stopWatchPanel;
+	private AlarmPanel alarmPanel;
   
-  public GUI()
-  {
-    initialization();
-  }
+	public GUI(){
+		initialization();
+	}
   
-  private void initialization()
-  {
-	  this.setIconImage(new ImageIcon(AppFrame.class.getResource(
+	private void initialization(){
+		this.setIconImage(new ImageIcon(AppFrame.class.getResource(
               "resources/icons/jnotes16.png"))
               .getImage());
-    this.timerPanel = new TimerPanel(new TimerListener());
-    this.timerPanel.setDisplay(this.timerModel.getTime());
+		this.timerPanel = new TimerPanel(new TimerListener());
+		this.timerPanel.setDisplay(this.timerModel.getTime());
     
-    this.stopWatchPanel = new StopWatchPanel(new StopWatchListener());
+		this.stopWatchPanel = new StopWatchPanel(new StopWatchListener());
     
-    this.alarmPanel = new AlarmPanel(new AlarmListener());
+		this.alarmPanel = new AlarmPanel(new AlarmListener());
     
-    JTabbedPane tabbedPane = new JTabbedPane();
-    tabbedPane.add("Timer", this.timerPanel);
-    tabbedPane.add("StopWatch", this.stopWatchPanel);
-    tabbedPane.add("Alarm", this.alarmPanel);
+		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.add("Timer", this.timerPanel);
+		tabbedPane.add("StopWatch", this.stopWatchPanel);
+		tabbedPane.add("Alarm", this.alarmPanel);
     
-    add(tabbedPane, "Center");
+		add(tabbedPane, "Center");
     
-    setTitle("Timer");
-    setVisible(true);
-    pack();
-  }
+		setTitle("Timer");
+		setVisible(true);
+		pack();
+		}
   
   protected void processWindowEvent(WindowEvent e) {
       if (e.getID() == WindowEvent.WINDOW_CLOSING) {
