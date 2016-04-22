@@ -2,6 +2,7 @@
 <project name="memoranda" default="package" basedir="." xmlns:jacoco="antlib:org.jacoco.ant" xmlns:cs="antlib:com.puppycrawl.tools.checkstyle.ant">
 	<!-- Build.xml file initially created by Kenneth J. Pouncey              -->
 	<!-- on 5 september 2003.                                                -->
+	<!-- Updated on: 21 April 2016 by David Diaz							 -->
 	<!-- Kenneth is the project-leader of the tn5250j-project on SourceForge -->
 	<!-- Thank you dude for your contribution to our project !               -->
 	<!-- You can reach him through email : kjpou@pt.lu                       -->
@@ -22,6 +23,8 @@
     <property name="tests.checkstyle.dir"  value="${tests.dir}/checkstyle"/>
     <property name="jarname"               value="${name}.jar"/>
     <property name="dist.dir"              value="${basedir}/dist"/>
+	<property name="dist.content.dir"      value="${dist.dir}/${name}${version}-${DSTAMP}"/>
+	
     <!-- compile options -->
     <property name="debug"       value="off"/>
     <property name="debuglevel"  value="lines,vars,source"/>
@@ -39,6 +42,9 @@
     <taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
     classpath="lib/checkstyle-6.15-all.jar"/>
 
+	<!-- =================================================================== -->
+	<!-- Initializes the build                                               -->
+	<!-- =================================================================== -->
 	<target name="init">
 		<!-- Create the time stamp -->
 		<tstamp/>
@@ -72,6 +78,9 @@
 			</manifest>
 		</jar>
 	</target>
+	<!-- =================================================================== -->
+	<!-- Compiles the project                                                -->
+	<!-- =================================================================== -->
 	<target name="compile" depends="init">
 		<!-- Compile the java code from ${src} into ${build} -->
 		<buildnumber/>
@@ -103,20 +112,28 @@
 			<fileset dir="." includes="tasklist.dtd"/>
 		</copy>
 	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Checks the build                                                    -->
+	<!-- =================================================================== -->
 	<target name="checkbuild">
 		<available file="${build.dir}/${jarname}" property="build.present"/>
 	</target>
 	<target name="build-if-needed" depends="checkbuild" unless="build.present">
 		<antcall target="package"/>
 	</target>
-	<target name="dist-full" depends="init, build-if-needed">
-		<!-- Create the full distribution includes:
-    build (build\)
-    sources (src\)
-    dependencies (\lib)    
-    -->
-		<property name="dist.content.dir" value="${dist.dir}/${name}${version}-${DSTAMP}"/>
-		<mkdir dir="${dist.content.dir}"/>
+		
+	
+	<!-- =================================================================== -->
+	<!-- Creates the distribution folder                         			 -->
+	<!-- =================================================================== -->
+	<target name="dist" depends="init, build-if-needed, clean-dist">		
+		<!-- Create the full distribution includes: 
+					build (build\) 
+					sources (src\) 
+					dependencies (\lib)-->
+		
+			<mkdir dir="${dist.content.dir}"/>
 		<copy todir="${dist.content.dir}/src">
 			<fileset dir="${source.dir}"/>
 		</copy>
@@ -133,12 +150,6 @@
 			<fileset dir="." includes="LICENSE"/>
 		</copy>
 		<copy todir="${dist.content.dir}">
-			<fileset dir="." includes="memoranda.bat"/>
-		</copy>
-		<copy todir="${dist.content.dir}">
-			<fileset dir="." includes="memoranda.sh"/>
-		</copy>
-		<copy todir="${dist.content.dir}">
 			<fileset dir="." includes="README.txt"/>
 		</copy>
 		<copy todir="${dist.content.dir}">
@@ -153,14 +164,39 @@
 		<copy todir="${dist.content.dir}">
 			<fileset dir="." includes="tasklist.dtd"/>
 		</copy>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Creates the distribution folder and zips it                         -->
+	<!-- =================================================================== -->
+	<target name="dist-full" depends = "dist">
+		<copy todir="${dist.content.dir}">
+			<fileset dir="." includes="memoranda.bat"/>
+		</copy>
+		<copy todir="${dist.content.dir}">
+			<fileset dir="." includes="memoranda.sh"/>
+		</copy>
+		<antcall target="zip"/>
+	</target>
+	
+	<target name="dist-win" depends = "dist">		
+		<copy todir="${dist.content.dir}">
+			<fileset dir="." includes="memoranda.bat"/>
+		</copy>
+	</target>
+	
+	<target name="dist-mac/lin" depends = "dist">		
+		<copy todir="${dist.content.dir}">
+			<fileset dir="." includes="memoranda.sh"/>
+		</copy>
+	</target>
+	
+	<target name="zip" unless="dist.present">		
 		<zip zipfile="${dist.dir}/${name}${version}-${DSTAMP}.zip">
 			<fileset dir="${dist.dir}" includes="${name}${version}-${DSTAMP}/**"/>
 		</zip>
-	</target>	
-	
-	<target name="dist" depends="init, clean-dist">		
-		<antcall target="dist-full"/>
 	</target>
+	
     
 	<target name="clean">
 		<!-- Delete the ${build} directory tree -->
